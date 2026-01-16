@@ -1,0 +1,27 @@
+{
+    "server":{
+        "title": "Sundown SMP",
+        "version": "1.21.10",
+        "ip": "mc.sundown.social",
+        "status_api": "https://api.mcsrvstat.us/2/mc.sundown.social"
+    },
+
+    "web": {
+        "title": "Sundown SMP",
+        "navigation": [
+            {"name": "Home", "url": "/index.html"},
+            {"name": "Join", "url": "/join/index.html"},
+            {"name": "Map", "url": "/map/index.html"},
+            {"name": "Vote", "url": "/vote/index.html"},
+            {"name": "Gallery", "url": "/gallery/index.html"},
+            {"name": "Rules", "url": "/rules/index.html"}
+        ]
+    },
+
+    "paths": {
+        "images": [
+            {"name": "/assets/img/uploads"}
+        ]
+    }
+
+}

@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+body{
+    margin: 0;
+    padding: 0;
+}
+
+@media (prefers-color-scheme: dark){
+    body {
+        background-color: rgb(31, 31, 31);
+    }
+
+    .header {
+        font-family: 'VT323', monospace;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        background-color: rgb(70, 54, 114);
+        height: clamp(4vh, 5cqw, 6vh);/* preferred 6% of the body's width, but resize to a minimum of 5% viewport height and 8% vh if window is narrowed */
+        padding: 0 5%;
+        color: white;
+        font-size: clamp(1rem, 3cqw, 3cqh);/* clamp the font size so it can be no less than 1% of the root (body), preferred 3%,
+        and max 4% to stay within the header's height with an acceptable margin*/
+
+        @media screen and (max-height: 700px){
+            height: clamp(42px, 8vh, 44px);/* make readable on shorter screen sizes, without layout shift */
+        }
+
+        @media screen and (max-width: 624px){
+            flex-direction: column;
+            justify-content: center;
+            height: auto;
+            min-height: 76px;
+            max-height: 84px;
+            padding: 15px 0;
+            margin-top: -2%;
+            font-size: 5vw;
+        }
+    }
+
+    #server_title {
+        position: relative;
+    }
+
+    header > a {
+        color:inherit;
+        text-decoration: none;
+        height: inherit;
+        display: flex;
+    }
+    
+
+    #version {
+        font-size: 60%;/* 60% of the header font size*/
+        text-align: center;
+    }
+
+    .title-group {
+        height: inherit;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        line-height: 1;
+    }
+
+    #navList {
+        font-size: inherit;
+        display: flex;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        align-items: center;
+        @media screen and (max-width: 624px){
+            margin-top: 8px;
+        }
+    }
+
+    #navList li a {
+            padding: 0 15px;
+            text-align: center;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+        }
+
+    #navList li a:hover {
+            background-color: rgb(90, 79, 122);
+            
+        }
+
+}
