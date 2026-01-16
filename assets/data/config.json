@@ -15,13 +15,26 @@
             {"name": "Vote", "url": "/vote/index.html"},
             {"name": "Gallery", "url": "/gallery/index.html"},
             {"name": "Rules", "url": "/rules/index.html"}
-        ]
-    },
-
-    "paths": {
-        "images": [
-            {"name": "/assets/img/uploads"}
+        ],
+        "gallery_path": [{"name": "/assets/img/uploads", "_comment": "This is where uploaded server photos are stored"}],
+        "gallery": [
+            {"name": "0.png", "alt_text": "A walking view of Choinc's original bridge build"},
+            {"name": "1.png", "alt_text": "An aerial view of Choinc's original bridge build"},
+            {"name": "2.png", "alt_text": "An aerial view of Choinc's original bridge build"},
+            {"name": "3.png", "alt_text": "Duifman's industrial-organic mechanism"},
+            {"name": "4.png", "alt_text": "An aerial view of Duifman's industrial-organic mechanism"},
+            {"name": "5.png", "alt_text": "Duifman's bridge and hangar"},
+            {"name": "6.png", "alt_text": "Duifman's enchanter boat and hangar"},
+            {"name": "7.png", "alt_text": "Generalsaab (sab)'s cozy hut"},
+            {"name": "8.png", "alt_text": "A beautiful and scenic image of Generalsaab (sab)'s scarecrow"},
+            {"name": "9.png", "alt_text": "Miku's adorable honey farm"},
+            {"name": "10.png", "alt_text": "Miku's home"},
+            {"name": "11.png", "alt_text": "Miku's trading hall building"},
+            {"name": "12.png", "alt_text": "Miku's cozy barn"},
+            {"name": "13.png", "alt_text": "Nerdy's happy ghas garage and entrance to barn"},
+            {"name": "14.png", "alt_text": "The end portal room"},
+            {"name": "15.png", "alt_text": "Miku staring off into the sunrise"},
+            {"name": "16.png", "alt_text": "Choinc's absurdly efficient piglin bartering farm"}
         ]
     }
-
 }
