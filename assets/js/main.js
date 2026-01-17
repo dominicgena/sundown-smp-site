@@ -36,32 +36,64 @@ async function initSite() {
 }
 
 async function slideshow(config){
-    const delay = 5000;
     if(document.URL.includes("/gallery/"))return;// don't do the slideshow if in gallery, because gallery should be displayed in a grid.
     const layerCurrent = document.getElementById('layer-current');
     const layerNext = document.getElementById('layer-next');
-    const imgPath = config.web.gallery_path.name;
-    const imgData = config.web.gallery;
+
+    // declare image root path as defined in config
+    const imgPath = config.web.gallery_path.name;// root directory address of the images
+    const imgData = config.web.gallery;// pointers to the image objects and alt texts
+    const ext = config.web.gallery_format.format;// extension as defined in json
+    // console.log("Extension: ", ext);
     // console.log("imgData: ", imgData);
     // sequence();
 
-    const sequence = () => {
-        let choiceCurrent = Math.floor(Math.random() * imgData.length);// random number between 0 and the number of images in the /assets/img/uploads/ folder
+    let currentIndex = Math.floor(Math.random() * imgData.length);// random number between 0 and the number of images in the /assets/img/uploads/ folder
+    // console.log("Current Index ", currentIndex, " chosen");
 
-        // pick a different number for the next element
-        do {
-            choiceNext = Math.floor(Math.random() * imgData.length);
-        } while (choiceNext === choiceCurrent);
+    // show the first image immediately
+    layerCurrent.src = `${imgPath}/${imgData[currentIndex].name}.${ext}`;
+    // console.log("layerCurrent.src: ", layerCurrent.src);
+    // console.log("Path assigned to layerCurrent.src: ", `${imgPath}/${imgData[currentIndex].name}.${ext}`);
+    layerCurrent.alt = imgData[currentIndex].alt_text;
+    layerCurrent.style.opacity = 1;
 
-        console.log("Selected image index ", choiceCurrent, " as current image.");
-        console.log("Selected image index ", choiceNext, " as next image.");
-        layerCurrent.src = `${imgPath}/${imgData[choiceCurrent].name}`;
-        layerCurrent.alt = `${imgData[choiceCurrent].alt_text}`;
-        layerNext.src = `${imgPath}/${imgData[choiceNext].name}`;
-        layerNext.alt = `${imgData[choiceNext].alt_text}`;
+    const transition = () => {
+        let nextIndex;
+
+        do {// pick a different number for the next element
+            nextIndex = Math.floor(Math.random() * imgData.length);
+        } while (nextIndex === currentIndex);
+
+        const preloader = new Image();// Create buffer for another image
+        preloader.src = `${imgPath}/${imgData[nextIndex].name}.${ext}`;// set that buffer's source to the target source of the next image
+        // console.log("Preloader path: ", preloader.src);
+
+        preloader.onload = () => {// only execute after loading is confirmed finished
+            layerNext.src = preloader.src;
+            layerNext.alt = imgData[nextIndex].alt_text;
+
+            layerNext.style.opacity = 1;// trigger transition
+
+            setTimeout(() => {
+                // move next image over to current slot
+                layerCurrent.src = layerNext.src;
+                layerCurrent.alt = layerNext.alt;
+
+                // hide the "next" layer. This won't be seen by the user, because the Current layer has the same image
+                layerNext.style.transition = 'none';
+                layerNext.style.opacity = 0;// make invisible
+
+                // re-enable transition for next cycle
+                layerNext.offsetHeight;
+                layerNext.style.transition = 'opacity 5s ease-in-out';
+
+                currentIndex = nextIndex;
+
+            }, 5000);
+        };
     };
-    sequence();// prepare with first image
-    setInterval(sequence, delay);
+    setInterval(transition, 10000);
 }
 
 

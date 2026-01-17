@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "images-folder-optimizer": "^0.0.37"
+  },
+  "dependencies": {
+    "sharp": "^0.34.5"
+  }
+}
