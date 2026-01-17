@@ -16,7 +16,7 @@
             {"name": "Gallery", "url": "/gallery/index.html"},
             {"name": "Rules", "url": "/rules/index.html"}
         ],
-        "gallery_path": [{"name": "/assets/img/uploads", "_comment": "This is where uploaded server photos are stored"}],
+        "gallery_path": {"name": "/assets/img/uploads"},
         "gallery": [
             {"name": "0.png", "alt_text": "A walking view of Choinc's original bridge build"},
             {"name": "1.png", "alt_text": "An aerial view of Choinc's original bridge build"},
@@ -25,7 +25,7 @@
             {"name": "4.png", "alt_text": "An aerial view of Duifman's industrial-organic mechanism"},
             {"name": "5.png", "alt_text": "Duifman's bridge and hangar"},
             {"name": "6.png", "alt_text": "Duifman's enchanter boat and hangar"},
-            {"name": "7.png", "alt_text": "Generalsaab (sab)'s cozy hut"},
+            {"name": "7.png", "alt_text": "Generaalsab (sab)'s cozy hut"},
             {"name": "8.png", "alt_text": "A beautiful and scenic image of Generalsaab (sab)'s scarecrow"},
             {"name": "9.png", "alt_text": "Miku's adorable honey farm"},
             {"name": "10.png", "alt_text": "Miku's home"},
