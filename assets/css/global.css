@@ -6,6 +6,45 @@ body{
 
 }
 
+.cog {
+    border-color: white;
+    border-style: dashed;
+    background-color: transparent;
+    border-width: 4px;
+    border-radius: 100%;
+    float: right;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+
+#cog3 {/* outer-most, and button */
+    margin: 30px 30px;
+    background-color: rgba(0,0,0,.5);
+    border-style: none;
+    padding: 2px;
+    scale: 1.3;
+    transform: rotate(270deg);
+    transform-origin: center;
+    transition: all 0.5s ease-in-out;
+}
+
+#cog3:hover {
+    scale: 1.5;
+    transform: rotate(90deg); /* do a barrel roll! */
+}
+
+#cog2 {/* outermost circle of the cog */
+    z-index: 2;
+    scale: .8;
+}
+
+#cog1 {/* inset 1 unit of cog2 */
+    border-style: solid;
+    padding: 3px;
+    z-index: 2;
+}
+
 .background-slideshow {
     z-index: -1;
     width: 100vw;
