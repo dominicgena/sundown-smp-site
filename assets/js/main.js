@@ -1,3 +1,6 @@
+let slideshowTimer;
+let currentInterval = 10000;
+
 async function initSite() {
     try {
         const response = await fetch('/assets/data/config.json');// fetch config
@@ -27,7 +30,17 @@ async function initSite() {
         });
 
         console.log("Sundown SMP: Navigation and config loaded successfully.");
-        slideshow(config);
+
+        const delayRadios = document.getElementsByName('delay');
+        delayRadios.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                currentInterval = parseInt(e.target.value) * 1000;
+
+                console.log(`Intervaal changed to: ${currentInterval}ms`);
+                startSlideshow(config, currentInterval);
+            });
+        });
+        startSlideshow(config, currentInterval);
 
     } catch (error) {
         console.error("Error loading site configuration:", error);
@@ -35,7 +48,16 @@ async function initSite() {
     }
 }
 
-async function slideshow(config){
+
+function startSlideshow(config, interval) {// wraper for clearing and starting. If radio button selection is enabled, clear the slideshow and start again with the new interval
+    if(slideshowTimer){
+        clearInterval(slideshowTimer);
+        slideshowTimer = null;
+    }
+    slideshow(config, interval);
+}
+
+async function slideshow(config, interval){
     if(document.URL.includes("/gallery/"))return;// don't do the slideshow if in gallery, because gallery should be displayed in a grid.
     const layerCurrent = document.getElementById('layer-current');
     const layerNext = document.getElementById('layer-next');
@@ -57,6 +79,11 @@ async function slideshow(config){
     // console.log("Path assigned to layerCurrent.src: ", `${imgPath}/${imgData[currentIndex].name}.${ext}`);
     layerCurrent.alt = imgData[currentIndex].alt_text;
     layerCurrent.style.opacity = 1;
+
+    if (interval < 0) {
+        console.log("Slideshow disabled. Static image set.");
+        return;
+    }
 
     const transition = () => {
         let nextIndex;
@@ -93,7 +120,7 @@ async function slideshow(config){
             }, 5000);
         };
     };
-    setInterval(transition, 10000);
+    slideshowTimer = setInterval(transition, interval);
 }
 
 
