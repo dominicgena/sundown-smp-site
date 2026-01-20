@@ -6,7 +6,7 @@ async function initSite() {
         const response = await fetch('/assets/data/config.json');// fetch config
         const config = await response.json();// config file
 
-        document.getElementById('server_title').innerText = config.server.title;// populate title and version from json
+        document.getElementById('server-title').innerText = config.server.title;// populate title and version from json
         document.getElementById('version').innerText = `Version ${config.server.version}`;
         
         // Update browser tab title to include version
@@ -14,7 +14,7 @@ async function initSite() {
         document.title = config.web.title + " " + config.server.version;
 
         // building navMenu
-        const navList = document.getElementById('navList');
+        const navList = document.getElementById('nav-list');
         const navData = config.web.navigation;
         navList.innerHTML = ''; 
 
@@ -31,7 +31,7 @@ async function initSite() {
 
         console.log("Sundown SMP: Navigation and config loaded successfully.");
 
-        const delayRadios = document.getElementsByName('delay');
+        const delayRadios = document.getElementsByName('delay-rad');
         delayRadios.forEach(radio => {
             radio.addEventListener('change', (e) => {
                 currentInterval = parseInt(e.target.value) * 1000;
@@ -59,7 +59,7 @@ async function initSite() {
 
     } catch (error) {
         console.error("Error loading site configuration:", error);
-        document.getElementById('server_title').innerText = "Sundown SMP";
+        document.getElementById('server-title').innerText = "Sundown SMP";
     }
 }
 

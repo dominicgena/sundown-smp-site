@@ -1,16 +1,139 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 body{
     margin: 0;
     padding: 0;
     background-color: rgb(31, 31, 31);
 }
 
+.background-slideshow {
+    z-index: -1;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    overflow: hidden;
+    inset: 0;
+    /* pointer-events: none; */
+}
+
+#layer-current, #layer-next {
+    opacity: 0;
+    position: absolute;
+    object-fit: cover;
+    transition: opacity 5s ease-in-out;
+    width: 100%;
+    height: 100%;
+}
+
+#layer-current { z-index: 1; }
+#layer-next { z-index: 2; }
+
+.header {
+    overflow: visible;
+    z-index: 10;
+    font-family: 'VT323', 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Console', monospace;
+    text-shadow: 2px 2px 5px white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(70, 54, 114);
+    background-size: contain;
+    height: clamp(4vh, 5cqw, 6vh);/* preferred 6% of the body's width, but resize to a minimum of 5% viewport height and 8% vh if window is narrowed */
+    padding: 0 5%;
+    color: white;
+    font-size: clamp(1rem, 3cqw, 3cqh);/* clamp the font size so it can be no less than 1% of the root (body), preferred 3%,
+    and max 4% to stay within the header's height with an acceptable margin*/
+    position: absolute;
+    width: 100%;
+    @media screen and (max-height: 700px){
+        height: clamp(42px, 8vh, 44px);/* make readable on shorter screen sizes, without layout shift */
+    }
+
+    @media screen and (max-width: 624px){
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        height: auto;
+        padding: 15px 0;
+        margin-top: -2%;
+        font-size: 5vw;
+    }
+}
+
+/* REGION - Title group */
+.header a.title-group /* Title link and version (a -> div)*/{
+    height: inherit;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1;
+    text-decoration: none;
+}
+
+.header a.title-group div#version {
+    font-size: 70%;/* 70% of the title's font size*/
+    text-align: center;/* Centered to title's text */
+}
+
+/* END_REGION - Title group */
+
+/* REGION - Header -> Top Navigation Menu */
+
+.nav-menu ul {
+    font-size: inherit;/* Inherit from .header */
+    list-style-type: none;
+    display: flex;
+    margin: 0;
+    align-items: center;
+    @media screen and (max-width: 624px){
+        margin-top: 8px;
+    }
+}
+
+.nav-menu ul li {
+    margin-right: 10px;
+}
+
+.nav-menu ul li a {/* more specificity than the list elements */
+    text-decoration: none;
+    color: inherit;
+    padding: 5px 10px;
+}
+
+nav.nav-menu ul li a:hover {/* higher specificity than li->a elements */
+    transition: background-color .5s;
+    background-color: rgb(134, 115, 190);
+    padding-top: 15px;
+    padding-bottom: 15px;
+    scrollbar-width: none;
+}
+
+nav.nav-menu ul li a:hover::after {/* higher specificity than li->a elements */
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -5px;
+    height: 4px;
+    z-index: 11;
+}
+
+/* END_REGION - Header -> Top Navigation Menu */
+
 .personalization-config {
     position: fixed;
     display: flex;
-    right: 64px;
-    top: clamp(64px, 92px, 22vw);
+    right: clamp(10px, 32px, 64px);
+    top: 64px;
     z-index: 3;
+    @media screen and (max-width: 720px){
+        top: 92px;/* make readable on shorter screen sizes, without layout shift */
+    }
 }
 
 .btn-cog {
@@ -71,10 +194,10 @@ position: absolute;
     transform: translateY(0);
 }
 
-.menu-header {
-text-align: center;
+.menu-header {/* For the personalization dropdown menu */
+    text-align: center;
     font-family: 'VT323', monospace;
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin: 5px 0 12px 0;
     padding-bottom: 8px;
     border-bottom: 2px solid rgba(255, 255, 255, 0.1);
@@ -125,107 +248,3 @@ input[type="radio"]:checked + .radio-custom {
     align-items: center;
     cursor: pointer;
 }
-
-.background-slideshow {
-    z-index: -1;
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    overflow: hidden;
-    inset: 0;
-    pointer-events: none;
-}
-
-#layer-current, #layer-next {
-    opacity: 0;
-    position: absolute;
-    object-fit: cover;
-    transition: opacity 5s ease-in-out;
-    width: 100%;
-    height: 100%;
-}
-
-#layer-current { z-index: 1; }
-#layer-next { z-index: 2; }
-
-.header {
-    z-index: 10;
-    font-family: 'VT323', 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Console', monospace;
-    text-shadow: 2px 2px 5px white;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    background-color: rgb(70, 54, 114);
-    height: clamp(4vh, 5cqw, 6vh);/* preferred 6% of the body's width, but resize to a minimum of 5% viewport height and 8% vh if window is narrowed */
-    padding: 0 5%;
-    color: white;
-    font-size: clamp(1rem, 3cqw, 3cqh);/* clamp the font size so it can be no less than 1% of the root (body), preferred 3%,
-    and max 4% to stay within the header's height with an acceptable margin*/
-
-    @media screen and (max-height: 700px){
-        height: clamp(42px, 8vh, 44px);/* make readable on shorter screen sizes, without layout shift */
-    }
-
-    @media screen and (max-width: 624px){
-        flex-direction: column;
-        justify-content: center;
-        height: auto;
-        min-height: 76px;
-        max-height: 84px;
-        padding: 15px 0;
-        margin-top: -2%;
-        font-size: 5vw;
-    }
-}
-
-#server_title {
-    position: relative;
-}
-
-header > a {
-    color:inherit;
-    text-decoration: none;
-    height: inherit;
-    display: flex;
-}
-
-
-#version {
-    font-size: 70%;/* 60% of the header font size*/
-    text-align: center;
-}
-
-.title-group {
-    height: inherit;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    line-height: 1;
-}
-
-#navList {
-    font-size: inherit;
-    display: flex;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    align-items: center;
-    @media screen and (max-width: 624px){
-        margin-top: 8px;
-    }
-}
-
-#navList li a {
-        z-index: 1;
-        padding: 0 15px;
-        text-align: center;
-        align-items: center;
-        text-decoration: none;
-        color: inherit;
-    }
-
-#navList li a:hover {
-        background-color: rgb(134, 115, 190);
-        padding: 0 10px 20px 20px;
-    }

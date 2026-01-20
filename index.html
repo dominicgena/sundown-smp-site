@@ -9,22 +9,21 @@
         <link rel="icon" type="image/x-icon" href="assets/img/ui/favicon.png">
         <link rel="stylesheet" href="/assets/css/global.css">
     </head>
-    <body id="body">
-        <header class=header>
-            <a href="index.html" id="title-link">
-                <div class="title-group">
-                    <div id="server_title">Loading server title...</div>
-                    <div id="version">Loading version ...</div>
-                </div>
-            </a>
-            
-            <nav class="navMenu">
-                <ul id="navList"></ul>
-            </nav>
-        </header>
-
+    <body>
         <div class="background-slideshow">
             <img id="layer-current" src="/assets/img/uploads/avif/1.avif" alt="" class="background-image"><img id="layer-next" src="" alt="" class="background-image">
+                <header class="header">
+                    <a href="index.html" class="title-group">
+                        <div>
+                            <div id="server-title">Loading server title...</div>
+                            <div id="version">Loading version ...</div>
+                        </div>
+                    </a>
+                    
+                    <nav class="nav-menu">
+                        <ul id="nav-list"></ul>
+                    </nav>
+                </header>
         </div>
 
         <div class="personalization-config">
@@ -33,31 +32,31 @@
             <!-- endregion ugly SVG stuff -->
 
             <div class="cog-dropdown">
-                <h3 class="menu-header">Slideshow Transition Delay:</h3>
+                <h3 class="menu-header">Slideshow Transition Interval</h3>
                 <div id="form-container">
                     <form class="delay" id="delay-form" action="assets/js/main.js">
-                        <label for="transitions-disabled"><input name="delay" value="-1" type="radio" id="transitions-disabled">
-                            <span class="radio-custom"></span>&nbsp;Disabled
+                        <label for="transitions-disabled"><input id="transitions-disabled" name="delay-rad" value="-1" type="radio">
+                            <span class="radio-custom transitions-disabled"></span>&nbsp;Disabled
                         </label><br>
                         <label for="10s">
-                            <input name="delay" value="10" type="radio" id="10s" checked>
-                            <span class="radio-custom"></span>&nbsp;10 Seconds
+                            <input id="10s" name="delay-rad" value="10" type="radio" checked>
+                            <span class="radio-custom 10s"></span>&nbsp;10 Seconds
                         </label><br>
                         <label for="15s">
-                            <input name="delay" value="15" type="radio" id="15s">
-                            <span class="radio-custom"></span>&nbsp;15 Seconds
+                            <input id="15s" name="delay-rad" value="15" type="radio">
+                            <span class="radio-custom 15s"></span>&nbsp;15 Seconds
                         </label><br>
                         <label for="30s">
-                            <input name="delay" value="30" type="radio" id="30s">
-                            <span class="radio-custom"></span>&nbsp;30 Seconds
+                            <input id="30s" name="delay-rad" value="30" type="radio">
+                            <span class="radio-custom 30s"></span>&nbsp;30 Seconds
                         </label><br>
                         <label for="45s">
-                            <input name="delay" value="45" type="radio" id="45s">
+                            <input id="45s" name="delay-rad" value="45" type="radio">
                             <span class="radio-custom"></span>&nbsp;45 Seconds
                         </label><br>
                         <label for="60s">
-                            <input name="delay" value="60" type="radio" id="60s">
-                            <span class="radio-custom"></span>&nbsp;60 Seconds
+                            <input id="60s" name="delay-rad" value="60" type="radio">
+                            <span class="radio-custom 60s"></span>&nbsp;60 Seconds
                         </label><br>
                     </form>
                 </div>

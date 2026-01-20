@@ -24,10 +24,45 @@
         </header>
 
         <div class="background-slideshow">
-            <img id="layer-current" src="" alt="" class="background-image"><img id="layer-next" src="" alt="" class="background-image">
+            <img id="layer-current" src="/assets/img/uploads/avif/1.avif" alt="" class="background-image"><img id="layer-next" src="" alt="" class="background-image">
         </div>
 
+        <div class="personalization-config">
+            <!-- region Ugly SVG stuff -->
+            <button class=btn-cog><svg viewBox="0 0 64 64"xmlns=http://www.w3.org/2000/svg><image data-name="settings (1)"height=64 href="data:img/png;base64,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"width=64 /></svg></button>
+            <!-- endregion ugly SVG stuff -->
+
+            <div class="cog-dropdown">
+                <h3 class="menu-header">Slideshow Transition Interval</h3>
+                <div id="form-container">
+                    <form class="delay" id="delay-form" action="assets/js/main.js">
+                        <label for="transitions-disabled"><input name="delay" value="-1" type="radio">
+                            <span class="radio-custom transitions-disabled"></span>&nbsp;Disabled
+                        </label><br>
+                        <label for="10s">
+                            <input name="delay" value="10" type="radio" checked>
+                            <span class="radio-custom 10s"></span>&nbsp;10 Seconds
+                        </label><br>
+                        <label for="15s">
+                            <input name="delay" value="15" type="radio">
+                            <span class="radio-custom 15s"></span>&nbsp;15 Seconds
+                        </label><br>
+                        <label for="30s">
+                            <input name="delay" value="30" type="radio">
+                            <span class="radio-custom 30s"></span>&nbsp;30 Seconds
+                        </label><br>
+                        <label for="45s">
+                            <input name="delay" value="45" type="radio">
+                            <span class="radio-custom"></span>&nbsp;45 Seconds
+                        </label><br>
+                        <label for="60s">
+                            <input name="delay" value="60" type="radio">
+                            <span class="radio-custom 60s"></span>&nbsp;60 Seconds
+                        </label><br>
+                    </form>
+                </div>
+            </div>
+        </div>
         <script src="/assets/js/main.js"></script>
     </body>
-
 </html>
