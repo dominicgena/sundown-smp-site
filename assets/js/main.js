@@ -42,6 +42,21 @@ async function initSite() {
         });
         startSlideshow(config, currentInterval);
 
+        // handle opening of the menu
+        const cogBtn = document.querySelector('.btn-cog');
+        const dropdown = document.querySelector('.cog-dropdown');
+
+        cogBtn.addEventListener('click', () => {
+            dropdown.classList.toggle('active');
+        });
+
+        // if user clicks outside the menu, close the menu
+        window.addEventListener('click', (e) => {
+            if (!cogBtn.contains(e.target) && !dropdown.contains(e.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+
     } catch (error) {
         console.error("Error loading site configuration:", error);
         document.getElementById('server_title').innerText = "Sundown SMP";
