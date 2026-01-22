@@ -16,6 +16,13 @@
             {"name": "Gallery", "url": "/gallery/index.html"},
             {"name": "Rules", "url": "/rules/index.html"}
         ],
+        "logo": [
+            {"text": "Beach", "for": "sundown-beach","id": "sundown-beach", "value": "/assets/img/ui/sundown_beach.avif"},
+            {"text": "Mountains 1 (Default)", "for": "mountains-1","id": "mountains-1", "value": "/assets/img/ui/sundown_mountains1.avif"},
+            {"text": "Mountains 2", "for": "mountains-2","id": "mountains-2", "value": "/assets/img/ui/sundown_mountains2.avif"},
+            {"text": "Mountains 3", "for": "mountains-3","id": "mountains-3", "value": "/assets/img/ui/sundown_mountains3.avif"}
+        ],
+        "radio-name": "sundown-logo",
         "gallery_path": {"name": "/assets/img/uploads/avif"},
         "gallery_format": {"format": "avif"},
         "gallery": [

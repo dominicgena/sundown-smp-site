@@ -16,7 +16,8 @@ async function initSite() {
         // building navMenu
         const navList = document.getElementById('nav-list');
         const navData = config.web.navigation;
-        navList.innerHTML = ''; 
+        navList.replaceChildren();// more secure than innerHtml
+
 
         navData.forEach(item => {
             const li = document.createElement('li');
@@ -57,10 +58,72 @@ async function initSite() {
             }
         });
 
+        // --------------------------------------------- Change logo logic --------------------------------------------- //
+
+        // Add options to the form
+        const logoOptions = config.web.logo;
+        // const radioName = config.web.radioName;
+        console.log("Logo options: ", logoOptions);
+        const logoSelectRoot = document.getElementById("logo-selection");// the element to append all labels and inputs to
+        const frmName = 'sundown-logo';
+
+        
+
+        // loop through logoOptions, and create and add a form entry for each object using the parameters defined in the json
+        logoOptions.forEach(item => {
+
+            const isDuplicate = Array.from(logoSelectRoot.querySelectorAll('label'))
+                .some(label => label.textContent.trim().includes(item.text.trim()));
+
+            if (isDuplicate) {
+                console.log(`Skipping duplicate logo option: ${item.text}`);
+                return; // Exit this iteration of the loop
+            }
+
+            const frmLabelElem = document.createElement('label');
+            const frmInputElem = document.createElement('input');
+            const frmSpanElem = document.createElement('span');
+
+            frmInputElem.type = 'radio';
+            frmInputElem.name = frmName;
+            frmInputElem.id = item.id;
+            frmInputElem.value = item.value; // file path of the selected image
+            
+            // check if item is the default (matching the current UI logo)
+            const currentLogo = document.querySelector('.logo img').getAttribute('src');
+            if (item.value === currentLogo) {
+                frmInputElem.checked = true;
+            }
+
+            // span for custom CSS radio
+            frmSpanElem.className = `radio-custom ${item.id}`;
+
+            // assemble the Label
+            frmLabelElem.setAttribute('for', item.id);// label's 'for' must represent what option it's for
+            frmLabelElem.appendChild(frmInputElem);
+            frmLabelElem.appendChild(frmSpanElem);
+
+            frmLabelElem.appendChild(document.createTextNode(` ${item.text}`));
+
+            // 4. Add Event Listener to change the logo and handle 'checked' state
+            frmInputElem.addEventListener('change', (e) => {
+                if (e.target.checked) {
+                    document.querySelector('.logo img').src = e.target.value;
+                    console.log(`Logo changed to: ${item.text}`);
+                }
+            });
+
+            logoSelectRoot.appendChild(frmLabelElem);
+            logoSelectRoot.appendChild(document.createElement('br')); // Optional spacing
+        });
+
+
+
     } catch (error) {
         console.error("Error loading site configuration:", error);
         document.getElementById('server-title').innerText = "Sundown SMP";
     }
+
 }
 
 
