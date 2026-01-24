@@ -126,7 +126,8 @@ nav.nav-menu ul li a:hover::after {/* higher specificity than li->a elements */
 
 .logo a {
     position: relative;
-    margin-top: 24vh;
+    z-index: 3;/* behind personalization dropdown when user scrolls up (only affects mobile and smaller screens)*/
+    margin-top: clamp(212px, 24vh, 32vh);
     display: flex;
     justify-content: center;
     align-items: center;
