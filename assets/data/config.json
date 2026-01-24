@@ -1,7 +1,7 @@
 {
     "server":{
         "title": "Sundown SMP",
-        "version": "1.21.10",
+        "version": "1.21.9",
         "ip": "mc.sundown.social",
         "status_api": "https://api.mcsrvstat.us/2/mc.sundown.social"
     },
@@ -10,11 +10,11 @@
         "title": "Sundown SMP",
         "navigation": [
             {"name": "Home", "url": "/index.html"},
-            {"name": "Join", "url": "/join/index.html"},
-            {"name": "Map", "url": "/map/index.html"},
-            {"name": "Vote", "url": "/vote/index.html"},
+            {"name": "Join", "url": "/index.html"},
+            {"name": "Map", "url": "/index.html"},
+            {"name": "Vote", "url": "/index.html"},
             {"name": "Gallery", "url": "/gallery/index.html"},
-            {"name": "Rules", "url": "/rules/index.html"}
+            {"name": "Rules", "url": "/index.html"}
         ],
         "logo": [
             {"text": "Beach", "for": "sundown-beach","id": "sundown-beach", "value": "/assets/img/ui/sundown_beach.avif"},

@@ -226,7 +226,7 @@ nav.nav-menu ul li a:hover::after {/* higher specificity than li->a elements */
     pointer-events: none;
 }
 
-.delay input[type="radio"] {
+.interval input[type="radio"] {
     position: absolute;
     opacity: 0;
     width: 0;
@@ -259,7 +259,7 @@ input[type="radio"]:checked + .radio-custom {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-#delay-form label {
+#interval-form label {
     display: inline-flex;
     align-items: center;
     cursor: pointer;
