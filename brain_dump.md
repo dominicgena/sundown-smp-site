@@ -75,3 +75,53 @@ Task: Smooth slideshow with crossfades on every page but the gallery page
             The first step is get a cog icon. I'd like there to be a spinning animation on the cog. I'm going to look and see if there are any implementations I can steal.
             I could not find any that are good, but I managed to make one entirely by accident (well, not really, my goal was to make one and it was successful much sooner than expected). All it is, is 2 thick-bordered cocentric circles touching, and the outer one has a dashed border. I am also very excited that I keep making accidental improvements to it, and managed to create something that is a lot simpler than any implementation I've been able to find.
 
+
+1/24/2026
+    Navigation Implementations
+        Home:
+            An introduction of the server and info about it
+                - Welcome message
+                - About message
+                    - Contains button linked to rules page that is identical to the rules page in the navigation bar
+                    - Contains another apply button triggering the join page the same way as the join option in the navigation bar
+                    - Frequently asked questions
+
+                - Gallery preview (manual slideshow with arrows to cycle images, preview of random images in the gallery underneath, arrows)
+                    - Manual slideshow
+                        - Arrows
+                            - Cycle to next image and disable background slideshow (to save bandwidth and clutter, if clutter is a concern)
+                        - Preview of random images in the gallery underneath
+                - Server status
+                - Player count
+                - Reviews
+
+            Apply Button (triggers join nav option press)
+        
+        Join:
+            Toggle visibility of a container that provides instructions for joining the server
+                How to apply:
+                    https://discord.gg/mG9Nn7V954
+                    When a user uses this specific invite link, they will be given the "Hasn't done SMP Application" rule that is configured to disappear after submitting an application. This will help us filter out very old members who have never joined despite using the link, removing them from the server if they are inactive (for security reasons)
+
+        
+        Map:
+            Open a canvas of the server's bluemap page
+        
+        Vote:
+            Display info about voting for the server, and sites they can vote on
+        
+        Gallery:
+            Toggle visibility of a div that contains previews of all images in assets\data\config.json's gallery array
+
+        Rules:
+            Display rules
+    
+    Of course, it's more wise to populate the base page first. It's way too early to be thinking about optimization, but I'm already thinking about lazy loading and reusing images preloaded during the slideshow for the gallery. To clarify, I already planned on using the same images, but if the site is preloading images, I might as well also send them somewhere they can be accessed by the gallery container. I think I'm just most intimidated about the gallery functionality because I'm really not sure at all what I want to do there. I'd like an upload functionality for images built into the website, but I don't just want everybody uploading their images, especially if they could in some way damage the server's reputation, or are generally useless (I probably don't have to prioritize just yet, but I will if uploads begin to fill up storage excessively). I think the best solution for this would be some kind of discord integration, where the upload button sends the photo to a special channel in the discord server, where it awaits approval, then I can either upload the photo manually or have some kind of bot integration where I press the approve button and it gets uploaded. I'd need a way to verify that they are actually on the discord, which sounds intimidating on its own. I finished all my homework early, so I have all this time that I feel like must be put to good use. This brings me to the ultimate decision of whether I should work on the gallery now, or if I should work on everything else first. As anxious as I am, I think I'll work on the content first so I can have time to gather plans.
+
+    Considering how often things will be appearing and disappearing upon selection of a navigation option, I really need to carefully consider the logic. There should be some main content on the home page that disappears when a user navigates to a different page. That page appears in place of the home content, while the logo and the global apply button (yet to be implemented) remain visible
+
+    The best way to do this would be to have elements specific to the join page to be part of a "join" class, same with map, vote, gallery, and rules
+    For the most part, each container is going to have common elements. One being the container of the content itself, for example: 
+        The server's introduction will be in a <p> element contained by a div that is formatted in complement with the page
+        The server introduction will be in the json file and fetched from there to populate the container
+

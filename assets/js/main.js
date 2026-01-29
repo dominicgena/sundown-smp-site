@@ -9,7 +9,7 @@ async function initSite() {
         document.getElementById('version').innerText = `Version ${config.server.version}`;  // version as defined in JSON
         document.title = config.web.title + " " + config.server.version;                    // Set the title (as appearing in the tab) to Sundown SMP x.x.x
 
-                                                            // build the header
+        //                                                 // build the header
         const navList = document.getElementById('nav-list');    // navigation list
         const navData = config.web.navigation;                  // define what should be added to the navList
         navList.replaceChildren();                              // clear the navList (if user reloads, it may double otherwise)
@@ -40,14 +40,14 @@ async function initSite() {
             dropdown.classList.toggle('active');                            // toggle the dropdown's visibility prerequisite on
         });
 
-                                                                                // if user clicks outside the menu, close the menu
+        //                                                                     // if user clicks outside the menu, close the menu
         window.addEventListener('click', (e) => {                                   // on click, materialize event object to act on in arrow function
             if (!cogBtn.contains(e.target) && !dropdown.contains(e.target)) {       // if clicked location is outside of cogBtn and dropdown
                 dropdown.classList.remove('active');                                // toggle dropdown's visibility prerequisite off
             }
         });
 
-        // --------------------------------------------- Change logo logic --------------------------------------------- //
+        // ------------------------------------------------------------------------- Change logo logic ------------------------------------------------------------------------- //
 
         const logoOptions = config.web.logo;                                // add options to the form per JSON
         const logoSelectRoot = document.getElementById("logo-selection");   // the element to append all labels and inputs to
@@ -82,12 +82,15 @@ async function initSite() {
             logoSelectRoot.appendChild(document.createElement('br'));
         });// end logoOptions loop for populating form
 
+        // ----------------------------------------------------------------------- END Change logo logic ----------------------------------------------------------------------- //
+
+        
+
     } catch (error) {
         console.error("Error loading site configuration:", error);
         document.getElementById('server-title').innerText = "Sundown SMP";
     }
 }
-
 
 function startSlideshow(config, interval) {// wraper for clearing and starting. If radio button selection is enabled, clear the slideshow and start again with the new interval
     if(slideshowTimer){
@@ -102,7 +105,7 @@ async function slideshow(config, interval){
     const layerCurrent = document.getElementById('layer-current');// GET layer-current element
     const layerNext = document.getElementById('layer-next');      // GET layer-next    element
 
-                                                    // declare image root path per config
+    //                                               //declare image root path per config
     const imgPath = config.web.gallery_path.name;       // root directory address of the images
     const imgData = config.web.gallery;                 // pointers to the image objects and alt texts
     const ext = config.web.gallery_format.format;       // extension as defined in json
