@@ -1,10 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
+:root {
+    --logo-top-margin: clamp(212px, 24vh, 32vh);
+    --content-padding: clamp(8px, 3%, 24px);
+    --content-font-minecraft: 'VT323', 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Console', monospace;
+    --scheme-bg-color: 70, 54, 114;
+    --content-font-times: "Times New Roman", Times, serif;
+}
+
 *, *::before, *::after {
     box-sizing: border-box;
 }
 
-body{
+body {
     margin: 0;
     padding: 0;
     background-color: rgb(31, 31, 31);
@@ -17,7 +25,6 @@ body{
     position: fixed;
     overflow: hidden;
     inset: 0;
-    /* pointer-events: none; */
 }
 
 #layer-current, #layer-next {
@@ -35,37 +42,25 @@ body{
 .header {
     overflow: visible;
     z-index: 10;
-    font-family: 'VT323', 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Console', monospace;
+    font-family: var(--content-font-minecraft);
     text-shadow: 2px 2px 5px white;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: rgb(70, 54, 114);
+    background-color: rgb(var(--scheme-bg-color));
     background-size: contain;
-    height: clamp(4vh, 5cqw, 6vh);/* preferred 6% of the body's width, but resize to a minimum of 5% viewport height and 8% vh if window is narrowed */
+    height: clamp(4vh, 5cqw, 6vh);
     padding: 0 5%;
     color: white;
-    font-size: clamp(1rem, 3cqw, 3cqh);/* clamp the font size so it can be no less than 1% of the root (body), preferred 3%,
-    and max 4% to stay within the header's height with an acceptable margin*/
-    position: absolute;
+    font-size: clamp(12pt, 3cqw, 3cqh);
+    position: fixed;
     width: 100%;
-    @media screen and (max-height: 700px){
-        height: clamp(42px, 8vh, 44px);/* make readable on shorter screen sizes, without layout shift */
-    }
-
-    @media screen and (max-width: 624px){
-        width: 100%;
-        flex-direction: column;
-        justify-content: center;
-        height: auto;
-        padding: 15px 0;
-        margin-top: -2%;
-        font-size: 5vw;
-    }
+    top: 0;
+    left: 0;
 }
 
-/* REGION - Title group */
-.header a.title-group /* Title link and version (a -> div)*/{
+.header a.title-group {
+    z-index: 3;
     height: inherit;
     color: inherit;
     display: flex;
@@ -76,43 +71,37 @@ body{
 }
 
 .header a.title-group div#version {
-    font-size: 70%;/* 70% of the title's font size*/
-    text-align: center;/* Centered to title's text */
+    z-index: 3;
+    font-size: 70%;
+    text-align: center;
 }
 
-/* END_REGION - Title group */
-
-/* REGION - Header -> Top Navigation Menu */
-
 .nav-menu ul {
-    font-size: inherit;/* Inherit from .header */
+    font-size: inherit;
     list-style-type: none;
     display: flex;
     margin: 0;
     align-items: center;
-    @media screen and (max-width: 624px){
-        margin-top: 8px;
-    }
 }
 
 .nav-menu ul li {
     margin-right: 10px;
 }
 
-.nav-menu ul li a {/* more specificity than the list elements */
+.nav-menu ul li a {
     text-decoration: none;
     color: inherit;
     padding: 5px 10px;
 }
 
-nav.nav-menu ul li a:hover {/* higher specificity than li->a elements */
+nav.nav-menu ul li a:hover {
     transition: background-color .5s;
     background-color: rgb(134, 115, 190);
     padding-top: 15px;
     padding-bottom: 15px;
 }
 
-nav.nav-menu ul li a:hover::after {/* higher specificity than li->a elements */
+nav.nav-menu ul li a:hover::after {
     content: "";
     position: absolute;
     left: 0;
@@ -122,25 +111,22 @@ nav.nav-menu ul li a:hover::after {/* higher specificity than li->a elements */
     z-index: 11;
 }
 
-/* END_REGION - Header -> Top Navigation Menu */
+.logo {
+    z-index: 2;/* Befind header when scrolling, but above background for visibility */
+}
 
 .logo a {
     position: relative;
-    z-index: 3;/* behind personalization dropdown when user scrolls up (only affects mobile and smaller screens)*/
-    margin-top: clamp(212px, 24vh, 32vh);
+    margin-top: var(--logo-top-margin);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .logo img {
-    scale: 0.5;
+    scale: 0.45;
     position: absolute;
     padding: 10px;
-
-    @media screen and (max-width: 624px) {
-        scale: 0.3;
-    }
 }
 
 .personalization-config {
@@ -149,9 +135,6 @@ nav.nav-menu ul li a:hover::after {/* higher specificity than li->a elements */
     right: clamp(10px, 32px, 64px);
     top: 64px;
     z-index: 3;
-    @media screen and (max-width: 720px){
-        top: 92px;/* make readable on shorter screen sizes, without layout shift */
-    }
 }
 
 .btn-cog {
@@ -161,12 +144,11 @@ nav.nav-menu ul li a:hover::after {/* higher specificity than li->a elements */
     border: none;
     position: relative;
     margin-top: 30px;
-    width: 50px; 
+    width: 50px;
     height: 50px;
     display: flex;
     transform-origin: center;
     padding: 0;
-    float: right;
 }
 
 .btn-cog svg {
@@ -187,21 +169,15 @@ nav.nav-menu ul li a:hover::after {/* higher specificity than li->a elements */
     background-color: rgba(16, 16, 16, 0.9);
     color: white;
     padding: 12px;
-    border-radius: 8px 0px 8px 8px; 
+    border-radius: 8px 0px 8px 8px;
     width: 212px;
     z-index: 4;
-
-    display: flex; 
+    display: flex;
     flex-direction: column;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-15px); /* start high for a drop effect */
-    transition: 
-        opacity 0.3s ease-out, 
-        transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
-        visibility 0.3s;
-    
-    /* Minecraft-style shadow */
+    transform: translateY(-15px);
+    transition: opacity 0.3s ease-out, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), visibility 0.3s;
     box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -212,14 +188,14 @@ nav.nav-menu ul li a:hover::after {/* higher specificity than li->a elements */
     transform: translateY(0);
 }
 
-.menu-header {/* For the personalization dropdown menu */
+.menu-header {
     text-align: center;
     font-family: 'VT323', monospace;
     font-size: 1rem;
     margin: 5px 0 12px 0;
     padding-bottom: 8px;
     border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-    color: #fcc21b; /* Minecraft Gold */
+    color: #fcc21b;
     line-height: 1;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -251,7 +227,7 @@ input[type="radio"]:checked + .radio-custom {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    border-color: #fcc21b; 
+    border-color: #fcc21b;
     image-rendering: pixelated;
 }
 
@@ -263,4 +239,185 @@ input[type="radio"]:checked + .radio-custom {
     display: inline-flex;
     align-items: center;
     cursor: pointer;
+}
+
+.content-box div {
+    margin: calc(var(--logo-top-margin) / 3) auto 17vh auto;
+    width: 40vw;
+    min-width: 624px;
+    padding: var(--content-padding);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 25px;
+}
+
+.home div {
+    color: white;
+    margin-top: 250px;
+    padding: calc(var(--content-padding)) - 1vh;
+}
+
+.home div.welcome-message {
+    background-color: rgba(var(--scheme-bg-color),.8);
+}
+
+.content-box div h1 {
+    padding: 0 1% 0 1%;
+    font-size: min(48pt, 8vh);
+    letter-spacing: 4px;
+    font-family: var(--content-font-minecraft);
+    margin: 6px;
+}
+
+.content-box div p {
+    padding: 0 1% 0 1%;
+    font-family: var(--content-font-times);
+    margin-top: 0;
+    font-size: 2vh;
+}
+
+.welcome-message em {/* '18+' */
+    font-size: 105%;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+@media screen and (max-width: 720px) {
+    .personalization-config {
+        top: 92px;/* Further down to compensate for nav bar growth */
+    }
+}
+
+@media screen and (max-height: 700px) {
+    .header {
+        height: clamp(42px, 8vh, 44px);
+    }
+}
+
+@media screen and (max-width: 624px) {/* All this does visually is put the title group on top, then the navigation bar underneath. At this width, the navigation bar items are still aligned vertically  */
+    .header {
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        height: auto;
+        padding: 15px 0;
+        margin-top: -2%;
+        font-size: 5vw;
+    }
+
+    .header a.title-group {
+        align-items: center;
+        text-align: center;
+        width: 100%;
+    }
+
+    .nav-menu ul {
+        justify-content: center;
+        width: 100%;
+        background-color: transparent;
+        padding: 0;
+        margin-top: 8px;
+    }
+
+    .logo img {/* Shrink the logo to be visible on narrower screens */
+        scale: 0.3;
+    }
+
+    .content-box div {/* Implicitly, the width will be the maximum of 320 and 90% of the viewport width. Once the window gets down below 320, the width obviously decreases further */
+        min-width: 320px;
+        width: 90vw;
+    }
+}
+
+@media screen and (max-width: 464px) {/* Make the nav menu options aligned horizontally instead of vertically and increase font size */
+    .nav-menu ul {
+        font-size: 12pt;
+        flex-direction: column;
+    }
+
+    nav.nav-menu ul li a:hover {
+        padding: 0;
+    }
+
+    .content-box div h1 {
+        font-size: 4vh;
+    }
+
+    .content-box div p {
+        font-size: 2vh;
+    }
+
+    .personalization-config {
+        top: 150px;
+    }
+}
+
+@media screen and (max-width: 388px){
+    .logo img {
+        scale: 0.18;
+        padding: 5px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .header {
+        padding: 10px 0;
+        margin-top: 0;
+    }
+
+    .header a.title-group {
+        font-size: 1.2rem;
+    }
+
+    .nav-menu ul {
+        font-size: 10pt;
+    }
+
+    .personalization-config {
+        top: auto;
+        bottom: 10px;
+        right: 10px;
+    }
+
+    .cog-dropdown {
+        bottom: 60px;
+        top: auto;
+    }
+
+    .logo img {
+        scale: 0.15;
+        padding: 5px;
+    }
+
+    .content-box div {
+        min-width: 100%;/* No left or right margins, just content */
+        width: 100%;
+        margin-top: 180px;
+        border-radius: 0;
+        padding: 15px 5px;
+    }
+
+    .content-box div h1 {
+        font-size: 1.8rem;
+        letter-spacing: 1px;
+    }
+
+    .content-box div p {
+        font-size: 0.9rem;
+    }
+
+    .personalization-config {
+        top: 200px;
+    }
+}
+
+@media screen and (max-width: 188px) {
+    .logo img {
+        scale: 0.1;
+        padding: 5px;
+    }
 }

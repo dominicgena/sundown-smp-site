@@ -1,0 +1,17 @@
+Development Environment Data:
+    Viewport Width:  2554
+    Viewport Height: 1274
+
+    Math:
+        Let the function f(w,x) be defined as w*round(x/w). This function will output the nearest number to the input (x) that is a perfect multiple of w.
+        Let the function g(V,S) be defined as floor((S/V)*100) to represent the inputted pixel count (P) as a percentage of the viewport size (either width or height)
+        bidirectional margin for content: f(16,644) = 640 -- The input (a test of preferred margin, x=644) rounded to the nearest multiple of w=16.
+            LEFT+RIGHT MARGIN: 640 px
+                vw representation: 25vw
+        
+        Logo Height: 96 px
+
+        Bottom margin between page contents:
+            f(16,225) = 224
+            BOTTOM MARGIN VH REPRESENTATION = g(1274, 224) = 17vh
+    

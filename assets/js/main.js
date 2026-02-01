@@ -1,7 +1,7 @@
 let slideshowTimer;
 let currentInterval = 10000;
 
-async function initSite() {
+async function initBase() {
     try {
         const response = await fetch('/assets/data/config.json');                           // fetch config
         const config = await response.json();                                               // ****************************** SET VARIABLE FOR CONFIG ******************************
@@ -146,4 +146,4 @@ async function slideshow(config, interval){
     slideshowTimer = setInterval(transition, interval);
 }
 
-document.addEventListener('DOMContentLoaded', initSite);
+document.addEventListener('DOMContentLoaded', initBase);

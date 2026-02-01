@@ -1,7 +1,7 @@
 {
     "server":{
         "title": "Sundown SMP",
-        "version": "1.21.9",
+        "version": "1.21.11",
         "ip": "mc.sundown.social",
         "status_api": "https://api.mcsrvstat.us/2/mc.sundown.social"
     },

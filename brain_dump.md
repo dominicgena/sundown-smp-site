@@ -77,7 +77,7 @@ Task: Smooth slideshow with crossfades on every page but the gallery page
 
 
 1/24/2026
-    Navigation Implementations
+    Navigation Implementation Details
         Home:
             An introduction of the server and info about it
                 - Welcome message
@@ -124,4 +124,19 @@ Task: Smooth slideshow with crossfades on every page but the gallery page
     For the most part, each container is going to have common elements. One being the container of the content itself, for example: 
         The server's introduction will be in a <p> element contained by a div that is formatted in complement with the page
         The server introduction will be in the json file and fetched from there to populate the container
+
+
+.content div {
+    margin: calc(var(--logo-top-margin) + 116px), 25vw, 17vh, 25vw;
+    display: grid;
+    grid-template-rows: 3% 1fr 3%;/* Top 3% height, Content, Bottom 3% height */
+    grid-template-columns: 3% 1fr 3%; /* Left 3% width, Content, Right 3% width */
+}
+
+.contend div p {
+    grid-area: 2 / 2;/* Row 2, column 2 of the grid.  */
+}
+
+Here, the div's margins are dependent on the viewport's width. Also, the contents of the div are dependent on the size of the viewport. I've come to the observation that this structure might present distortions when the viewport size is smaller.
+Better use clamp to make padding responsive and pretty.
 

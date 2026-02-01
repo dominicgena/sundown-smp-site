@@ -10,20 +10,20 @@
         <link rel="stylesheet" href="/assets/css/global.css">
     </head>
     <body>
+        <header class="header global" id="header">
+            <a href="index.html" class="title-group">
+                <div>
+                    <div id="server-title">Loading server title...</div>
+                    <div id="version">Loading version ...</div>
+                </div>
+            </a>
+            <nav class="nav-menu" id="nav-menu">
+                <ul id="nav-list"></ul>
+            </nav>
+        </header>
+
         <div class="background-slideshow">
             <img id="layer-current" src="/assets/img/uploads/avif/1.avif" alt="" class="background-image"><img id="layer-next" src="" alt="" class="background-image">
-                <header class="header global">
-                    <a href="index.html" class="title-group">
-                        <div>
-                            <div id="server-title">Loading server title...</div>
-                            <div id="version">Loading version ...</div>
-                        </div>
-                    </a>
-                    
-                    <nav class="nav-menu">
-                        <ul id="nav-list"></ul>
-                    </nav>
-                </header>
         </div>
 
         <div class="logo">
@@ -68,7 +68,18 @@
             </div>
         
         </div>
+
+        <div class="content-box home">
+            <div class="content welcome-message">
+                <h1>Welcome to Sundown SMP</h1><br>
+                <p>An <em>18+</em> vanilla SMP server valuing talent, creativity, and community engagement in its members</p>
+            </div>
+            <div class="content">
+                <p>Loading content again...</p>
+            </div>
+        </div>
         
-        <script src="/assets/js/main.js"></script>
+        <script src="/assets/js/main.js" defer></script>
+        <script src="/assets/js/content.js" defer></script>
     </body>
 </html>
