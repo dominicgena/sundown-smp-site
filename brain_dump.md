@@ -7,7 +7,7 @@ Task: Smooth slideshow with crossfades on every page but the gallery page
  b. A timer set to 60,000 ms (60s) will trigger the next image function upon its completion
  c. The fade will be a smooth fade taking 5 seconds to switch from one photo to the next
 3. Challenges: These are high-resolution images (1920x1080). It's a heavy load to fetch more than maybe 3 at a time or have them constantly loaded (guestimate based on nothing except my intuition). The heavy load might cause the browser to fall behind and show a blank screen as the background until the next photo can be loaded
- solution: The javascript should pre-fetch the next image in the sequence 10-15 seconds before the transition is scheduled to happen. This will make sure that the next photo is ready before the transition is attempted
+ solution: The javascript should pre-fetch the next image in the sequence 10-15 seconds before the transition kis scheduled to happen. This will make sure that the next photo is ready before the transition is attempted
 
 4. Summary (I'm temporarily disregarding browser freezes caused by wait functions for simplicity, I will refine as needed)
     if(user.isOnGalleryPage = yes)
