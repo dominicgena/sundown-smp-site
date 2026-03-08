@@ -284,32 +284,30 @@ div.welcome-message {
 }
 
 .flex-table {
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     flex-flow: row wrap;
     gap: 1.5rem;
 }
 
 .flex-table div {
-    background-color: transparent;
-    margin: 2rem 0;
+    margin: 1rem 0;
 }
 
-.table-item {
-    background-color: transparent;
+.flex-table .table-item {
     display: flex;
     width: 45%;
     gap: 1rem;
+    margin-top: 0;
     align-items: flex-start;
-    padding: 1rem;
     box-sizing: border-box;
 }
 
 .elaboration {
+    text-indent: .5em;
     text-align: left;
     margin-left: 32px;
 }
-
-
 
 @media screen and (max-width: 720px) {    
     .personalization-config {
@@ -390,7 +388,7 @@ div.welcome-message {
     }
 
     .content-box {
-        width: 95%; 
+        width: 90%; 
         padding: 10px;
     }
 
@@ -418,6 +416,10 @@ div.welcome-message {
 
     .content {
         min-width: 320px;
+    }
+
+    .flex-table div {
+        margin-top: 0;
     }
 }
 
@@ -459,7 +461,7 @@ div.welcome-message {
         min-width: 100%;/* No left or right margins, just content */
         width: 100%;
         margin-top: 120px;
-        border-radius: 0;
+        border-radius: 25px;
         padding: 15px 5px;
     }
 
@@ -480,6 +482,13 @@ div.welcome-message {
         margin-top: 250px;
     }
 
+    .flex-table div {
+        margin-top: 0;
+    }
+
+    .flex-table .table-item:not(.first){
+        margin-top: -50px;
+    }
 }
 
 @media screen and (max-width: 188px) {
@@ -509,6 +518,9 @@ div.welcome-message {
         font-size: 0.9rem;
     }
 
+    .flex-table div {
+        margin-top: 0;
+    }
 }
 
 @media screen and (max-height: 1048px) {
