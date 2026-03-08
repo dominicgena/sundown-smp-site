@@ -82,9 +82,14 @@ async function initBase() {
             logoSelectRoot.appendChild(document.createElement('br'));
         });// end logoOptions loop for populating form
 
-        // ----------------------------------------------------------------------- END Change logo logic ----------------------------------------------------------------------- //
+        // -------------- END Change logo logic --------------// 
+        const navDrop = document.getElementById('navbar-drop');
+        const navMenu = document.querySelector('.nav-menu ul');
 
-        
+        navDrop.addEventListener('click', () => {
+            navMenu.classList.toggle('show');
+            navDrop.classList.toggle('active');
+        });
 
     } catch (error) {
         console.error("Error loading site configuration:", error);

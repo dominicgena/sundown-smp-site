@@ -76,6 +76,11 @@ div p {
     text-decoration: none;
 }
 
+.header #navbar-drop {
+    display: none;
+    margin-bottom: 1em;
+}
+
 #version {
     z-index: 3;
     font-size: 70%;
@@ -373,6 +378,40 @@ div.welcome-message {
 }
 
 @media screen and (max-width: 480px) {/* Make the nav menu options aligned horizontally instead of vertically and increase font size */
+    .nav-menu ul {
+        display: none;
+    }
+
+    .nav-menu ul.show {
+        display: flex;
+    }
+
+    .header #navbar-drop {
+        display: inline-block;
+        width: 32px;
+        height: 16px;
+        background: transparent;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        vertical-align: bottom;
+        margin-top: .5em;
+        align-items: center;
+        width: 100%;
+        scale: 0.4;
+    }
+
+    .header #navbar-drop svg {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: transform 0.3s ease-in-out;/* make the arrow spin when pressed */
+    }
+
+    .header #navbar-drop.active svg {
+        transform: rotate(180deg);
+    }
+
     .personalization-config {
         margin-top: -100px;
         top: 0;
