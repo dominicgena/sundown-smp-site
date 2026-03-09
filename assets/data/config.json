@@ -9,12 +9,11 @@
     "web": {
         "title": "Sundown SMP",
         "navigation": [
-            {"name": "Home", "url": "/index.html"},
-            {"name": "Join", "url": "/index.html"},
-            {"name": "Map", "url": "/index.html"},
-            {"name": "Vote", "url": "/index.html"},
-            {"name": "Gallery", "url": "/gallery/index.html"},
-            {"name": "Rules", "url": "/index.html"}
+            {"name": "Home", "url": "/index.html", "target": "_self"},
+            {"name": "Join", "url": "/index.html", "target": "_self"},
+            {"name": "Map", "url": "https://map.sundown.social/#world:9021:311:-6087:81:0:0:0:0:perspective", "target": "_blank"},
+            {"name": "Gallery", "url": "/gallery/index.html", "target": "_self"},
+            {"name": "Rules", "url": "/index.html", "target": "_self"}
         ],
         "logo": [
             {"text": "Beach", "for": "sundown-beach","id": "sundown-beach", "value": "/assets/img/ui/sundown_beach.avif"},

@@ -19,6 +19,7 @@ async function initBase() {
             const link = document.createElement('a');   // CREATE the link ELEMENT
             link.href = item.url;                       // Set url for this specific element. Only affects gallery page bc it's the only page with a different html
             link.textContent = item.name;               // Name as defined in the JSON
+            link.target = item.target;
             li.appendChild(link);                       // ADD the link element as a child of the list item
             navList.appendChild(li);                    // ADD the list item as a child of the navigation list
         });

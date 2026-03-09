@@ -293,6 +293,7 @@ div.welcome-message {
     display: flex;
     flex-flow: row wrap;
     gap: 1.5rem;
+    justify-content: center;
 }
 
 .flex-table div {
@@ -306,6 +307,15 @@ div.welcome-message {
     margin-top: 0;
     align-items: flex-start;
     box-sizing: border-box;
+}
+
+.item-content p a {
+    text-decoration: underline;
+    color: white;
+    font-family: var(--content-font-minecraft);
+    /* font-family: 'VT323', monospace; */
+    /* font-weight: bold; */
+    font-size: 150%;
 }
 
 .elaboration {
