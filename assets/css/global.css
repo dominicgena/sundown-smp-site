@@ -246,6 +246,14 @@ input[type="radio"]:checked + .radio-custom {/* keep this collapsed bc there's n
 .content {
     min-width: 700px;
     background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 16px;
+}
+
+.content a {
+    text-decoration: underline;
+    color: white;
+    font-family: var(--content-font-minecraft);
+    font-size: 20pt;
 }
 
 .content-box {
@@ -322,6 +330,19 @@ div.welcome-message {
     text-indent: .5em;
     text-align: left;
     margin-left: 32px;
+}
+
+/* -------------------------------------------------------------------- toggleable divs -------------------------------------------------------------------- */
+.content-box.invisible {
+    display: none;
+}
+
+.content-box.content-box-override div {
+    background-color: transparent;
+}
+
+#rules-conclusion {
+    font-size: 48pt;
 }
 
 @media screen and (max-width: 720px) {    

@@ -3,17 +3,18 @@
         "title": "Sundown SMP",
         "version": "1.21.11",
         "ip": "mc.sundown.social",
-        "status_api": "https://api.mcsrvstat.us/2/mc.sundown.social"
+        "status_api": "https://api.mcsrvstat.us/2/mc.sundown.social",
+        "invite_link": "https://discord.gg/RSqph2a46T"
     },
 
     "web": {
         "title": "Sundown SMP",
         "navigation": [
             {"name": "Home", "url": "/index.html", "target": "_self"},
-            {"name": "Join", "url": "/index.html", "target": "_self"},
+            {"name": "Join", "url": "#join", "target": "_self"},
             {"name": "Map", "url": "https://map.sundown.social/#world:9021:311:-6087:81:0:0:0:0:perspective", "target": "_blank"},
             {"name": "Gallery", "url": "/gallery/index.html", "target": "_self"},
-            {"name": "Rules", "url": "/index.html", "target": "_self"}
+            {"name": "Rules", "url": "#rules", "target": "_self"}
         ],
         "logo": [
             {"text": "Beach", "for": "sundown-beach","id": "sundown-beach", "value": "/assets/img/ui/sundown_beach.avif"},
@@ -32,16 +33,15 @@
             {"name": "4", "alt_text": "An aerial view of Duifman's industrial-organic mechanism"},
             {"name": "5", "alt_text": "Duifman's bridge and hangar"},
             {"name": "6", "alt_text": "Duifman's enchanter boat and hangar"},
-            {"name": "7", "alt_text": "Generaalsab (sab)'s cozy hut"},
-            {"name": "8", "alt_text": "A beautiful and scenic image of Generalsaab (sab)'s scarecrow"},
-            {"name": "9", "alt_text": "Miku's adorable honey farm"},
-            {"name": "10", "alt_text": "Miku's home"},
-            {"name": "11", "alt_text": "Miku's trading hall building"},
-            {"name": "12", "alt_text": "Miku's cozy barn"},
-            {"name": "13", "alt_text": "Nerdy's happy ghas garage and entrance to barn"},
-            {"name": "14", "alt_text": "The end portal room"},
-            {"name": "15", "alt_text": "Miku staring off into the sunrise"},
-            {"name": "16", "alt_text": "Choinc's absurdly efficient piglin bartering farm"}
+            {"name": "7", "alt_text": "A beautiful and scenic image of Generalsaab (sab)'s scarecrow"},
+            {"name": "8", "alt_text": "Miku's adorable honey farm"},
+            {"name": "9", "alt_text": "Miku's home"},
+            {"name": "10", "alt_text": "Miku's trading hall building"},
+            {"name": "11", "alt_text": "Miku's cozy barn"},
+            {"name": "12", "alt_text": "Nerdy's happy ghast garage and entrance to barn"},
+            {"name": "13", "alt_text": "The end portal room"},
+            {"name": "14", "alt_text": "Miku staring off into the sunrise"},
+            {"name": "15", "alt_text": "Choinc's absurdly efficient piglin bartering farm"}
         ]
     }
 }

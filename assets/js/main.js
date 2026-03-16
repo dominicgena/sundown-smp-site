@@ -16,16 +16,25 @@ async function initBase() {
 
         navData.forEach(item => {                   // header navigation
             const li = document.createElement('li');    // CREATE the list item ELEMENT
+            li.id = `${item.name}`.toLowerCase();       // set the id of this element
             const link = document.createElement('a');   // CREATE the link ELEMENT
             link.href = item.url;                       // Set url for this specific element. Only affects gallery page bc it's the only page with a different html
             link.textContent = item.name;               // Name as defined in the JSON
             link.target = item.target;
             li.appendChild(link);                       // ADD the link element as a child of the list item
             navList.appendChild(li);                    // ADD the list item as a child of the navigation list
+            document.getElementById(`${li.id}`).addEventListener('click', function(event) {// event listener that calls corresponding display function
+                const functionName = `handle_nav_click`;// call the appropriate function
+                if (typeof window[functionName] === 'function') {
+                    window[functionName](event);
+                } else {
+                    console.warn(`Attempted to call ${functionName}, but it doesn't exist.`);
+                }
+            });
         });
 
         const intervalRadios = document.getElementsByName('interval-rad');  // Fetch the radio buttons for setting slideshow interval
-        intervalRadios.forEach(radio => {                                   
+        intervalRadios.forEach(radio => {
             radio.addEventListener('change', (e) => {                       // when a different radio button is selected
                 currentInterval = parseInt(e.target.value) * 1000;          // multiply the radio's corresponding value by 1000 to get milliseconds
                 startSlideshow(config, currentInterval);                    // execute wrapper at new interval
@@ -71,19 +80,19 @@ async function initBase() {
             frmInputElem.name = frmName;
             frmInputElem.type = 'radio';
             frmInputElem.value = item.value; // file path of the selected image
-            
+
             frmSpanElem.className = `radio-custom ${item.id}`;// for css targeting
             if (item.value === document.querySelector('.logo img').getAttribute('src'))
                 frmInputElem.checked = true;// check the default
 
             frmInputElem.addEventListener('change', (e) => {
-                if (e.target.checked) document.querySelector('.logo img').src = e.target.value;// if 'change' event is a check event, set it to the chosen option's value  
+                if (e.target.checked) document.querySelector('.logo img').src = e.target.value;// if 'change' event is a check event, set it to the chosen option's value
             });
             logoSelectRoot.appendChild(frmLabelElem);
             logoSelectRoot.appendChild(document.createElement('br'));
         });// end logoOptions loop for populating form
 
-        // -------------- END Change logo logic --------------// 
+        // -------------- END Change logo logic --------------//
         const navDrop = document.getElementById('navbar-drop');
         const navMenu = document.querySelector('.nav-menu ul');
 
@@ -91,6 +100,18 @@ async function initBase() {
             navMenu.classList.toggle('show');
             navDrop.classList.toggle('active');
         });
+
+        const rulesLink = document.querySelector('.join a[href="#rules"]');
+        rulesLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            const rulesNavItem = document.getElementById('rules');
+            if (rulesNavItem) {
+                rulesNavItem.click(); 
+            }
+        });
+
+        inv_links = document.getElementsByClassName('server-invite-link');
+        for(const item of inv_links){ item.href = config.server.invite_link; }// the clicking of any item in this class will redirect to invite
 
     } catch (error) {
         console.error("Error loading site configuration:", error);
@@ -150,6 +171,43 @@ async function slideshow(config, interval){
         };
     };
     slideshowTimer = setInterval(transition, interval);
+}
+
+function handle_nav_click(event) {
+    // 'this' refers to the <li> that was clicked
+    // If 'this' is undefined (because of how it's called), 
+    // we fallback to event.currentTarget (the <li>)
+    const targetElement = event.currentTarget || this;
+    
+    // Get the ID directly from the <li>
+    const q = targetElement.id; 
+    
+    console.log("Navigating to section:", q);
+
+    const toggleables = document.getElementsByClassName('toggleable');
+    for (const item of toggleables) {
+        item.classList.add('invisible');
+    }
+    
+    // Find the content box that matches the ID
+    const element = document.getElementsByClassName(q)[0];// hopefully i don't forget to not add other items to this class like an idiot
+    if (element) {
+        element.classList.remove('invisible');
+
+        // Find the specific child div with the "content" class
+        const contentChild = element.querySelector('.content');
+
+        if (contentChild) {
+            contentChild.animate([
+                { backgroundColor: 'rgba(var(--scheme-bg-color), 0.5)' },
+                { backgroundColor: 'rgba(var(--scheme-bg-color), .9)' }
+            ], {
+                duration: 500,
+                easing: 'ease-out',
+                fill: 'forwards' // This ensures it stays at the end color after finishing
+            });
+        }
+    }
 }
 
 document.addEventListener('DOMContentLoaded', initBase);
