@@ -3,7 +3,7 @@
         "title": "Sundown SMP",
         "version": "1.21.11",
         "ip": "mc.sundown.social",
-        "status_api": "https://api.mcsrvstat.us/2/mc.sundown.social",
+        "status_api": "https://api.mcstatus.io/v2/status/java/sundown.social",
         "invite_link": "https://discord.gg/RSqph2a46T"
     },
 
@@ -42,6 +42,12 @@
             {"name": "13", "alt_text": "The end portal room"},
             {"name": "14", "alt_text": "Miku staring off into the sunrise"},
             {"name": "15", "alt_text": "Choinc's absurdly efficient piglin bartering farm"}
+        ],
+
+        "staff": [
+        {"name": "chonkleblorp", "url": "https://discord.com/users/1200315477013049414", "rank_roles": [{"SMP Owner": 1421991150482358272}, {"Shooting Stars": 1415502254722781344}, {"Starlings": 1393491319686565898}]},
+        {"name": "Tthe_Nerdy", "url": "https://discord.com/users/583838117870567426", "rank_roles": [{"Supernova": 1415505969042948146}, {"Shooting Stars": 1415502254722781344}, {"Starlings": 1393491319686565898}]},
+        {"name": "pans_miku", "url": "https://discord.com/users/760151904025575455", "rank_roles": [{"Shooting Stars": 1415502254722781344}, {"Starlings": 1393491319686565898}]}
         ]
     }
 }

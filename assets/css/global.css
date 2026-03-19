@@ -204,7 +204,7 @@ div p {
     pointer-events: none;
 }
 
-.interval input[type="radio"] {
+.personalize input[type="radio"] {
     position: absolute;
     opacity: 0;
     width: 0;
@@ -237,7 +237,7 @@ input[type="radio"]:checked + .radio-custom {/* keep this collapsed bc there's n
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-#interval-form label {
+#personalize-form label {
     display: inline-flex;
     align-items: center;
     cursor: pointer;
@@ -343,6 +343,121 @@ div.welcome-message {
 
 #rules-conclusion {
     font-size: 48pt;
+}
+
+/* --- 1. Footer & Main Container --- */
+.main-footer {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: lightgray;
+    display: flex;
+    flex-direction: column; /* Stack header and list vertically */
+    align-items: center;    /* Center children horizontally */
+    justify-content: center;/* Center children vertically */
+    padding: 20px 0;
+    text-align: center;     /* Ensures text inside elements stays centered */
+}
+
+#staff-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.main-footer h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+/* --- 2. Shared Button & SVG Styles --- */
+.staff-expand, 
+.expand-roles {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    line-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.staff-expand svg, 
+.expand-roles svg {
+    transform: rotate(-90deg);
+    transition: transform 0.3s ease-in-out;
+    transform-origin: center;
+}
+
+.staff-expand:hover svg, 
+.expand-roles:hover svg {
+    transform: rotate(0deg);
+}
+
+.staff-expand.active svg, 
+.expand-roles.active svg {
+    transform: rotate(0deg) !important;
+}
+
+/* --- 3. The Staff List & Member Rows --- */
+.staff-list {
+    display: none;
+    width: 100%;
+    max-width: 800px; /* Optional: keeps the list from getting too wide on desktop */
+}
+
+.main-footer:has(.staff-expand.active) .staff-list {
+    display: block;
+}
+
+.member {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center; /* Centers the name and arrow */
+    gap: 10px;
+    padding: 8px 0;
+    width: 100%;
+}
+
+/* --- 4. The Roles List (The Dropdown Content) --- */
+.all-roles {
+    display: none;
+    width: 100%;
+    margin-top: 5px;
+    font-size: 0.9em;
+    color: #cccccc;
+    justify-content: center; /* Centers the comma-separated list */
+    text-align: center;
+}
+
+.expand-roles.active + .all-roles {
+    display: flex; 
+    animation: slideDownFade 0.3s ease-out;
+}
+
+/* --- 5. Typography & Links --- */
+a.discord-name-link {
+    text-decoration: none;
+    font-weight: normal;
+    color: #fcc21b;
+}
+
+a.discord-name-link:hover {
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+.featured-role {
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+}
+
+/* --- 6. Animation --- */
+@keyframes slideDownFade {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 @media screen and (max-width: 720px) {    
