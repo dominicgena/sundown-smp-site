@@ -45,9 +45,9 @@
         ],
 
         "staff": [
-        {"name": "chonkleblorp", "url": "https://discord.com/users/1200315477013049414", "rank_roles": [{"SMP Owner": 1421991150482358272}, {"Shooting Stars": 1415502254722781344}, {"Starlings": 1393491319686565898}]},
-        {"name": "Tthe_Nerdy", "url": "https://discord.com/users/583838117870567426", "rank_roles": [{"Supernova": 1415505969042948146}, {"Shooting Stars": 1415502254722781344}, {"Starlings": 1393491319686565898}]},
-        {"name": "pans_miku", "url": "https://discord.com/users/760151904025575455", "rank_roles": [{"Shooting Stars": 1415502254722781344}, {"Starlings": 1393491319686565898}]}
+        {"name": "chonkleblorp", "url": "https://discord.com/users/1200315477013049414", "rank_roles": ["SMP Owner and admin, website developer, administrator, moderator", "Shooting Stars", "Starlings"]},
+        {"name": "Tthe_Nerdy", "url": "https://discord.com/users/583838117870567426", "rank_roles": ["Discord server owner, moderator, administrator", "Supernova", "Shooting Stars", "Starlings"]},
+        {"name": "pans_miku", "url": "https://discord.com/users/760151904025575455", "rank_roles": ["Moderator, administrator", "Shooting Stars", "Starlings"]}
         ]
     }
 }

@@ -8,8 +8,7 @@ async function initSite() {
     populateNavBar(config.web.navigation);
     initNavDropToggle();
     personalizationConfig();// turn customization changes into functions
-    initFooter();
-    populateStaff(config.web.staff);
+    initFooter(config.web.staff, config.server.ip);
 }
 
 async function getConfig(configFile) {
@@ -244,10 +243,47 @@ async function slideshow(imgPath, imgData, ext, interval){
     slideshowTimer = setInterval(transition, interval);
 }
 
-function initFooter() {
+function initFooter(staffList, address) {
     const footer = document.querySelector('.main-footer');
     if (!footer) return;
+    initStaff(footer);
+    populateStaff(staffList);
+    console.log("Calling addServerAddressToFooter");
+    addServerAddressToFooter(address);
+    console.log("Called addServerAddressToFooter");
+}
 
+function addServerAddressToFooter(ip) {
+    const ipContainer = document.querySelector('#footer-server-ip h3');
+    
+    if (ipContainer && ip) {
+        const ipSpan = document.createElement('span');
+        ipSpan.className = 'ip-text';
+        ipSpan.textContent = ip;
+        ipSpan.title = "Click to copy IP";
+
+        const feedback = document.createElement('span');
+        feedback.className = 'copy-feedback';
+        feedback.textContent = 'Copied!';
+
+        ipContainer.appendChild(ipSpan);
+        ipContainer.appendChild(feedback);
+
+        ipSpan.addEventListener('click', () => {
+            navigator.clipboard.writeText(ip).then(() => {
+                // trigger the 'copied' animation
+                feedback.classList.add('show');
+                
+                // hide after 2 seconds
+                setTimeout(() => {
+                    feedback.classList.remove('show');
+                }, 2000);
+            });
+        });
+    }
+}
+
+function initStaff(footer) {
     const staffContainer = document.createElement('div');
     staffContainer.className = "staff-list";
     
@@ -262,40 +298,53 @@ function initFooter() {
     expandBtn.addEventListener('click', () => {
         expandBtn.classList.toggle('active');
     });
-
     footer.appendChild(staffContainer);
 }
 
 function populateStaff(members) {
     const staffDest = document.querySelector('.staff-list');
     if (!staffDest) return;
+    staffDest.innerHTML = '';// clear content if necessary
 
     for (let i = 0; i < members.length; i++) {
         const member = members[i];
         const memberDiv = document.createElement('div');
         memberDiv.className = "member";
+
+        // name and featured role (first role in the list)
         const nameField = document.createElement('h3');
         nameField.className = "name";
+
         const nameLink = document.createElement('a');
         nameLink.href = member.url;
         nameLink.className = 'discord-name-link';
         nameLink.textContent = member.name + ": ";
-        const roleTitle = Object.keys(member.rank_roles[0])[0];
-        const formattedRole = roleTitle.charAt(0).toUpperCase() + roleTitle.slice(1).toLowerCase();
+
+        const firstRole = member.rank_roles[0] || "";
+        const formattedFirstRole = firstRole.charAt(0).toUpperCase() + firstRole.slice(1).toLowerCase();
+
         const roleSpan = document.createElement('span');
         roleSpan.className = 'featured-role';
-        roleSpan.textContent = formattedRole;
+        roleSpan.textContent = formattedFirstRole;
+
         nameField.appendChild(nameLink);
         nameField.appendChild(roleSpan);
+
+        // expand button
         const expandBtn = document.createElement('button');
         expandBtn.className = 'expand-roles';
         expandBtn.title = "View all roles";
         expandBtn.innerHTML = `<svg width="16" height="8" viewBox="0 0 16 8"><g><path style="fill:rgb(92%,92%,92%);" d="M0.9 -0.1c0.9 0 1.3 0.4 1.9 1l0.3 0.3c0.2 0.2 0.3 0.3 0.5 0.4l0.2 0.2q0.6 0.5 1.2 1a76 76 0 0 1 1.2 1q0.1 0.1 0.3 0.2c0.2 0.1 0.3 0.3 0.5 0.4l0.2 0.2 0.2 0.2c0.2 0.2 0.4 0.3 0.7 0.4l0.3 -0.3c0.8 -0.7 1.5 -1.4 2.3 -2.1 0.4 -0.4 0.9 -0.8 1.3 -1.1 0.5 -0.5 1.1 -1 1.7 -1.4 0.3 -0.2 0.3 -0.2 0.5 -0.5 0.3 0 0.3 0 0.8 0l0.4 0c0.3 0.2 0.3 0.2 0.6 0.2a2.8 2.8 0 0 1 0 1.4c-0.4 0.5 -0.8 0.8 -1.3 1.1q-0.3 0.3 -0.7 0.6 -0.2 0.1 -0.3 0.3a27 27 0 0 0 -1.6 1.3c-0.6 0.5 -1.1 1 -1.7 1.5a29.5 29.5 0 0 0 -1 0.9q-0.2 0.1 -0.3 0.3a11 11 0 0 0 -0.5 0.5c-0.3 0.3 -0.7 0.5 -1.1 0.5 -0.9 0 -1.4 -0.8 -2 -1.4q-0.3 -0.3 -0.7 -0.6a27.5 27.5 0 0 1 -1.4 -1.1 32.5 32.5 0 0 0 -1.8 -1.5 33 33 0 0 1 -1.3 -1.2c-0.3 -0.2 -0.3 -0.2 -0.6 -0.4c-0.3 -0.2 -0.3 -0.2 -0.4 -0.5l0 -0.4c0 -0.1 0 -0.2 0 -0.4c0 -0.1 0.4 -0.1 0.9 -0.1"/></g></svg>`;
-        const allRoleNames = member.rank_roles.flatMap(obj => Object.keys(obj));
-        const rolesDisplay = allRoleNames.map(r => r.charAt(0).toUpperCase() + r.slice(1).toLowerCase()).join(", ");
+
+        // full role list
+        const rolesDisplay = member.rank_roles
+            .map(r => r.charAt(0).toUpperCase() + r.slice(1).toLowerCase())// sentence casing of each role title
+            .join(", ");
+
         const rolesField = document.createElement('div'); 
         rolesField.className = 'all-roles';
         rolesField.textContent = rolesDisplay;
+
         expandBtn.addEventListener('click', () => {
             expandBtn.classList.toggle('active');
         });
