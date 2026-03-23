@@ -140,3 +140,26 @@ Task: Smooth slideshow with crossfades on every page but the gallery page
 Here, the div's margins are dependent on the viewport's width. Also, the contents of the div are dependent on the size of the viewport. I've come to the observation that this structure might present distortions when the viewport size is smaller.
 Better use clamp to make padding responsive and pretty.
 
+
+------------------------------------------------ 03/21/2026 ------------------------------------------------
+Now that most of the site is finished (though, I might modify the javascript occasionally with better error handling), I'm ready to start thinking about the gallery upload setup. The idea that I came up with that's most resonating with me is to somehow hook the upload event up to a Discord bot that sends the uploaded image into a specified Discord channel, where I will press either approve or deny to confirm whether the image should be allowed on the website. This ensures that only authorized users (users on the SMP) are allowed to upload images. There needs to be a way to make sure that user is actually in the Discord server and has the "Sundown SMP" rule for this to be safe and effective, so I'll need to learn a lot about developing Discord bots, Discord web authentication, etc.
+
+Logic:
+User clicks the "gallery" nav option
+    User clicks "upload" button
+    ???
+    ...
+    Image arrives in Discord channel
+    People/person with the specified Discord role get(s) to vote on whether it should be uploaded or not
+
+In general, the website (on the client devices) talks to the web server. The new part is that the server needs to talk to Discord
+Node.js will be the engine for authentication and image routing. The Discord bot will take the image from Node and put it into the channel
+
+One idea is to have images uploaded to a temporary server and have the discord bot provide URLs to the images on that temporary server while they await approval, but this risks DoS attacks because users will be allowed to upload as many images as they'd like. There would need to be some sort of rate limiting functionality or a procedure to mitigate these risks. Overall, having the images sent directly to a Discord server sounds like a better option. This would allow me to make a chain of backup servers in case anything bad were to happen.
+
+The biggest search results I'm seeing have to do with OAuth2. I've heard of this, but never did anything major with it before enough to understand exactly what it is, so I will watch some tutorials.
+* Express handles routing to Discord
+This looks simple enough, https://www.youtube.com/watch?v=0y-DsaI3ZcM
+This setup will give me a user's account ID, which I can use to see if the user is in the discord and has a certain role. This can supposedly be done using guild.get_member(user_id) to see if they're in the server, then I can inspect their roles using member.roles. The challenge is, the user has to give me permission to be able to do this.
+
+As excited as I am, I remembered that I actually need to have a manual slideshow div to show the photos. It's neither necessary nor efficient to have the automatic slideshow running in the background while users are looking at the slideshow manually, so pressing the gallery button should first disable the transition interval for the background slideshow

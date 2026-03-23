@@ -1,11 +1,15 @@
+let slideshowTimer = null;
+let galleryIndex = 0;
 async function initSite() {
     const config = await getConfig('/assets/data/config.json');
+    config.web.gallery.sort((a, b) => a.name.localeCompare(b.name));
+    closeGalleryView();// make sure the background images show after refresh
     setTitleData(config.web.title, config.server.version);
     let currentInterval = 10000;
     // cleaned so these functions don't need to access the whole config
-    let slideshowTimer;
     startSlideshow(config.web.gallery_path.name, config.web.gallery, config.web.gallery_format.format, currentInterval, slideshowTimer);
     populateNavBar(config.web.navigation);
+    initGallery(config.web.gallery_path.name, config.web.gallery, config.web.gallery_format.format);
     initNavDropToggle();
     personalizationConfig();// turn customization changes into functions
     initFooter(config.web.staff, config.server.ip);
@@ -20,7 +24,7 @@ async function getConfig(configFile) {
     } catch (error) {
         console.error("Error loading site configuration:", error);
         throw error;
-    }   
+    }
 }
 
 function setTitleData(title, version) {
@@ -65,17 +69,23 @@ function initNavDropToggle() {
 }
 
 function handleNavClick(query) {
-    const toggleables = document.getElementsByClassName('toggleable');
-    for (const item of toggleables) {
-        item.classList.add('invisible');
+    closeGalleryView();
+    const toggleables = document.querySelectorAll('.toggleable, .home');
+    toggleables.forEach(item => item.classList.remove('active'));
+
+    if (query === 'gallery') {
+        const path = config.web.gallery_path.name;
+        const data = config.web.gallery;
+        const ext = config.web.gallery_format.format;
+        openGalleryView(path, data, ext);
+        return;
     }
-    
-    const element = document.getElementsByClassName(query)[0];
-    if (element) {
-        element.classList.remove('invisible');
 
-        const contentChild = element.querySelector('.content');
+    const target = document.querySelector(`.${query}`);
+    if (target) {
+        target.classList.add('active');
 
+        const contentChild = target.querySelector('.content');
         if (contentChild) {
             contentChild.animate([
                 { backgroundColor: 'rgba(var(--scheme-bg-color), 0.5)' },
@@ -90,7 +100,7 @@ function handleNavClick(query) {
 
     if (query === 'join') {// if user clicked join,
         // simulate clicking on the rules button
-        const rulesLink = element.querySelector('a[href="#rules"]');
+        const rulesLink = target.querySelector('a[href="#rules"]');
         
         // check if the link exists and ensure we only attach the listener once
         if (rulesLink && !rulesLink.dataset.listenerAttached) {
@@ -103,7 +113,7 @@ function handleNavClick(query) {
                 }
             });
             
-            // Mark it so we don't add the listener again next time
+            // mark to prevent reduntant eventListener creations
             rulesLink.dataset.listenerAttached = "true";
         }
     }
@@ -118,6 +128,80 @@ function populateJoin() {
             rulesNavItem.click(); 
         }
     });
+}
+
+function initGallery(imgPath, imgData, ext) {
+    const galleryNavOption = document.querySelector('.nav-menu #gallery');    
+    galleryNavOption.addEventListener('click',  () => openGalleryView(imgPath, imgData, ext));
+}
+
+function openGalleryView(imgPath, imgData, ext) {
+    // hide other toggleables first
+    const toggleables = document.querySelectorAll('.toggleable');
+    toggleables.forEach(item => item.classList.remove('active'));
+
+    window.location.hash = "gallery"; 
+    galleryIndex = 0;
+
+    // stop background slideshow
+    if (slideshowTimer) {
+        clearInterval(slideshowTimer);
+        slideshowTimer = null;
+    }
+
+    // activate gallery div
+    const galleryDiv = document.querySelector('.gallery-container');
+    if (galleryDiv) {
+        galleryDiv.classList.add('active'); // This triggers the CSS display: flex
+    }
+
+    // load image
+    const firstImage = `${imgPath}/${imgData[0].name}.${ext}`;
+    putImageInGallery(firstImage, imgData[0].alt_text);
+
+    // setup buttons
+    document.getElementById('previous-image').onclick = () => previousImage(imgPath, imgData, ext);
+    document.getElementById('next-image').onclick = () => nextImage(imgPath, imgData, ext);
+}
+
+function nextImage(path, images, ext) {
+    galleryIndex = (galleryIndex + 1) % images.length;
+    updateGalleryDisplay(path, images, ext);
+}
+
+function previousImage(path, images, ext) {
+    galleryIndex = (galleryIndex - 1 + images.length) % images.length;
+    updateGalleryDisplay(path, images, ext);
+}
+
+function updateGalleryDisplay(path, images, ext) {
+    const currentImgObj = images[galleryIndex];     
+    const fullPath = `${path}/${currentImgObj.name}.${ext}`;
+    putImageInGallery(fullPath, currentImgObj.alt_text);
+}
+
+function putImageInGallery(image, altText = "") {
+    const imageView = document.querySelector('#active-gallery-image');
+    if (imageView) {
+        imageView.src = image;
+        imageView.alt = altText;
+    }
+
+    const descriptionView = document.getElementById('image-description');
+    if (descriptionView) {
+        descriptionView.innerText = altText;
+    }
+}
+
+function closeGalleryView() {
+    const galleryDiv = document.querySelector('.gallery-container');
+    if (galleryDiv) {  galleryDiv.classList.remove('active');  }
+
+    // clean url
+    if (window.location.href.includes('gallery')) {
+        const cleanURL = window.location.href.split(/[?#]gallery/)[0];
+        window.history.replaceState({}, document.title, cleanURL);
+    }
 }
 
 function personalizationConfig() {
@@ -139,7 +223,6 @@ function personalizationConfig() {
     });
 
     dropdown.addEventListener('change', (e) => {
-        console.log(e.target);
         logoConfig(e.target);
         slideshowConfig(e.target);
     });
@@ -178,23 +261,22 @@ function populateLogoOptions(logoOptions) {
 
 function logoConfig(target) {
     // translate the event into a command to change the logo
-    if (target.checked && target.name == 'sundown-logo') document.querySelector('.logo img').src = target.value;
+    if (target.checked && target.name == 'sundown-logo' && target.value) document.querySelector('.logo img').src = target.value;
 }
 
 function slideshowConfig(target) {
     // translate the event into a command to start the slideshow
+    closeGalleryView();
     if (target.checked && target.name == 'interval-rad') {
         const interval = target.value * 1000;// expected in ms
         const galleryPath = config.web.gallery_path.name;
         const galleryData = config.web.gallery;
-        console.log(galleryPath);
-        console.log(galleryData);
         const ext = config.web.gallery_format.format;
-        startSlideshow(galleryPath, galleryData, ext, interval, slideshowTimer);
+        startSlideshow(galleryPath, galleryData, ext, interval);
     }
 }
 
-function startSlideshow(imgPath, imgData, ext, interval, slideshowTimer) {
+function startSlideshow(imgPath, imgData, ext, interval) {
     // wrapper that ensures the existing slideshow timer is used
     // this makes sure selected interval is always used
     if(slideshowTimer){
@@ -210,7 +292,8 @@ async function slideshow(imgPath, imgData, ext, interval){
 
     let currentIndex = Math.floor(Math.random() * imgData.length);
 
-    layerCurrent.src = `${imgPath}/${imgData[currentIndex].name}.${ext}`;
+    const imgToShow = `${imgPath}/${imgData[currentIndex].name}.${ext}`;
+    if (imgToShow) { layerCurrent.src = imgToShow; }
     layerCurrent.alt = imgData[currentIndex].alt_text;
     layerCurrent.style.opacity = 1;
 
@@ -248,9 +331,7 @@ function initFooter(staffList, address) {
     if (!footer) return;
     initStaff(footer);
     populateStaff(staffList);
-    console.log("Calling addServerAddressToFooter");
     addServerAddressToFooter(address);
-    console.log("Called addServerAddressToFooter");
 }
 
 function addServerAddressToFooter(ip) {
@@ -336,14 +417,20 @@ function populateStaff(members) {
         expandBtn.title = "View all roles";
         expandBtn.innerHTML = `<svg width="16" height="8" viewBox="0 0 16 8"><g><path style="fill:rgb(92%,92%,92%);" d="M0.9 -0.1c0.9 0 1.3 0.4 1.9 1l0.3 0.3c0.2 0.2 0.3 0.3 0.5 0.4l0.2 0.2q0.6 0.5 1.2 1a76 76 0 0 1 1.2 1q0.1 0.1 0.3 0.2c0.2 0.1 0.3 0.3 0.5 0.4l0.2 0.2 0.2 0.2c0.2 0.2 0.4 0.3 0.7 0.4l0.3 -0.3c0.8 -0.7 1.5 -1.4 2.3 -2.1 0.4 -0.4 0.9 -0.8 1.3 -1.1 0.5 -0.5 1.1 -1 1.7 -1.4 0.3 -0.2 0.3 -0.2 0.5 -0.5 0.3 0 0.3 0 0.8 0l0.4 0c0.3 0.2 0.3 0.2 0.6 0.2a2.8 2.8 0 0 1 0 1.4c-0.4 0.5 -0.8 0.8 -1.3 1.1q-0.3 0.3 -0.7 0.6 -0.2 0.1 -0.3 0.3a27 27 0 0 0 -1.6 1.3c-0.6 0.5 -1.1 1 -1.7 1.5a29.5 29.5 0 0 0 -1 0.9q-0.2 0.1 -0.3 0.3a11 11 0 0 0 -0.5 0.5c-0.3 0.3 -0.7 0.5 -1.1 0.5 -0.9 0 -1.4 -0.8 -2 -1.4q-0.3 -0.3 -0.7 -0.6a27.5 27.5 0 0 1 -1.4 -1.1 32.5 32.5 0 0 0 -1.8 -1.5 33 33 0 0 1 -1.3 -1.2c-0.3 -0.2 -0.3 -0.2 -0.6 -0.4c-0.3 -0.2 -0.3 -0.2 -0.4 -0.5l0 -0.4c0 -0.1 0 -0.2 0 -0.4c0 -0.1 0.4 -0.1 0.9 -0.1"/></g></svg>`;
 
-        // full role list
+        // full role list (excluding the first/featured role already displayed)
         const rolesDisplay = member.rank_roles
-            .map(r => r.charAt(0).toUpperCase() + r.slice(1).toLowerCase())// sentence casing of each role title
+            .slice(1)
+            .map(r => r.charAt(0).toUpperCase() + r.slice(1).toLowerCase())
             .join(", ");
 
         const rolesField = document.createElement('div'); 
         rolesField.className = 'all-roles';
         rolesField.textContent = rolesDisplay;
+
+        // hide the expand button if there are no additional roles to show
+        if (member.rank_roles.length <= 1) {
+            expandBtn.style.display = 'none';
+        }
 
         expandBtn.addEventListener('click', () => {
             expandBtn.classList.toggle('active');
