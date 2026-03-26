@@ -163,3 +163,4 @@ This looks simple enough, https://www.youtube.com/watch?v=0y-DsaI3ZcM
 This setup will give me a user's account ID, which I can use to see if the user is in the discord and has a certain role. This can supposedly be done using guild.get_member(user_id) to see if they're in the server, then I can inspect their roles using member.roles. The challenge is, the user has to give me permission to be able to do this.
 
 As excited as I am, I remembered that I actually need to have a manual slideshow div to show the photos. It's neither necessary nor efficient to have the automatic slideshow running in the background while users are looking at the slideshow manually, so pressing the gallery button should first disable the transition interval for the background slideshow
+Now that that's done, I can get into integrating Discord

@@ -84,6 +84,7 @@ function handleNavClick(query) {
     const target = document.querySelector(`.${query}`);
     if (target) {
         target.classList.add('active');
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
         const contentChild = target.querySelector('.content');
         if (contentChild) {
@@ -152,7 +153,8 @@ function openGalleryView(imgPath, imgData, ext) {
     // activate gallery div
     const galleryDiv = document.querySelector('.gallery-container');
     if (galleryDiv) {
-        galleryDiv.classList.add('active'); // This triggers the CSS display: flex
+        galleryDiv.classList.add('active');
+        galleryDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     // load image
@@ -378,6 +380,7 @@ function initStaff(footer) {
 
     expandBtn.addEventListener('click', () => {
         expandBtn.classList.toggle('active');
+        expandBtn.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
     footer.appendChild(staffContainer);
 }
@@ -434,6 +437,7 @@ function populateStaff(members) {
 
         expandBtn.addEventListener('click', () => {
             expandBtn.classList.toggle('active');
+            expandBtn.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
 
         memberDiv.appendChild(nameField);
