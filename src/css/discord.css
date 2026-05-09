@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+:root {
+    --mc-font: 'VT323', monospace;
+    --accent: #ffaa00;
+}
+
+* { box-sizing: border-box; }
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden; 
+    background: radial-gradient(circle, #1a1a1a 0%, #000000 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.landing-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+    width: 100%;
+}
+
+.branding {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.main-logo {
+    width: clamp(280px, 65vw, 520px);
+    height: auto;
+    filter: drop-shadow(0 0 20px rgba(0,0,0,0.8));
+}
+
+.join-card {
+    background: rgba(20, 20, 20, 0.6);
+    padding: 2.5rem;
+    border-radius: 20px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    width: 90%;
+    max-width: 420px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+}
+
+.join-card h2 { 
+    font-family: var(--mc-font); 
+    font-size: 2.5rem; 
+    margin: 0; 
+    color: white;
+    letter-spacing: 2px;
+}
+
+.join-card p { 
+    color: #999; 
+    margin: 15px 0; 
+    font-size: 1.1rem;
+    font-family: sans-serif;
+}
+
+#countdown { color: var(--accent); font-weight: bold; }
+
+.manual-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 12px 24px;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    text-decoration: none;
+    font-family: var(--mc-font);
+    font-size: 1.4rem;
+    border-radius: 4px;
+    transition: 0.2s ease-in-out;
+}
+
+.manual-btn:hover { 
+    background: var(--accent); 
+    color: #000;
+}

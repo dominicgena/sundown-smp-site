@@ -1,0 +1,6 @@
+/discord    /discord.html    200
+/home       /index.html    301
+/join       /index.html#join    301
+/rules       /index.html#rules    301
+/map       https://map.sundown.social    301
+/gallery    /index.html#gallery 301
