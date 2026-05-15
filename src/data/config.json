@@ -14,7 +14,8 @@
             {"name": "Join", "url": "#join", "target": "_self"},
             {"name": "Map", "url": "https://map.sundown.social/#world:9021:311:-6087:81:0:0:0:0:perspective", "target": "_blank"},
             {"name": "Gallery", "url": "#gallery", "target": "_self"},
-            {"name": "Rules", "url": "#rules", "target": "_self"}
+            {"name": "Rules", "url": "#rules", "target": "_self"},
+            {"name": "Downloads", "url": "#downloads", "target": "_self"}
         ],
         "logo": [
             {"text": "Beach", "for": "sundown-beach","id": "sundown-beach", "value": "/assets/ui/sundown_beach.avif"},
@@ -44,6 +45,10 @@
             {"name": "gal-s1-miku-trading-hall-20260322", "altText": "Miku's trading hall building"},
             {"name": "gal-s1-nerdy-ghast-barn-20260322", "altText": "Nerdy's happy ghast garage and entrance to barn"},
             {"name": "gal-s1-prs0n-forest-mansion-20260510", "altText": "Prs0n's beautiful large taiga mansion and farm"}
+        ],
+
+        "downloads": [
+            {"season": 1, "download": "https://drive.google.com/file/d/1ExQUZP-tztxZdmd6IxkvfT0vHjdftXWD/view?usp=sharing"}
         ],
 
         "staff": [
