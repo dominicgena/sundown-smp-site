@@ -1,21 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
 :root {
-    --logo-top-margin: clamp(212px, 24vh, 32vh);
-    --content-padding: clamp(8px, 3%, 24px);
+    --scheme-bg-color: #463672;
     --content-font-minecraft: 'VT323', 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Console', monospace;
-    --scheme-bg-color: 70, 54, 114;
-    --scheme-accent-color: #ffaa00;
-    --content-font-times: "Times New Roman", Times, serif;
 }
 
-*, *::before, *::after {
+/* Globals */
+html, body {
+    overflow-x: clip;
+    width: 100vw;
+    max-width: 100%;
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
 }
 
 body {
-    margin: 0;
-    padding: 0;
     background-color: rgb(31, 31, 31);
 }
 
@@ -26,6 +27,16 @@ div p {
     font-size: 2vh;
 }
 
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+}
+
+/* Background Slideshow */
 .background-slideshow {
     z-index: -1;
     width: 100vw;
@@ -47,98 +58,104 @@ div p {
 #layer-current { z-index: 1; }
 #layer-next { z-index: 2; }
 
-.header {
+header#header {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+div.header {
+    top: 0;
+    z-index: 4;
     overflow: visible;
-    z-index: 10;
+    background-color: var(--scheme-bg-color);
+    padding: .5% 5%;
     font-family: var(--content-font-minecraft);
     text-shadow: 2px 2px 5px white;
-    display: flex;
+    box-sizing: border-box;
+    height: clamp(80px, 6vh, 100px);
     align-items: center;
-    justify-content: space-between;
-    background-color: rgb(var(--scheme-bg-color));
-    background-size: contain;
-    height: clamp(4vh, 5cqw, 6vh);
-    padding: 0 5%;
-    color: white;
-    font-size: clamp(12pt, 3cqw, 3cqh);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-}
-
-.header a.title-group {
-    z-index: 3;
-    color: inherit;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    line-height: 1;
-    text-decoration: none;
+    width: 100vw;
+    max-width: 100%;
+    background-size: contain;
+    justify-content: space-between;
 }
 
-.header #navbar-drop {
-    display: none;
-    margin-bottom: 1em;
-}
-
-#version {
-    z-index: 3;
-    font-size: 70%;
+.title-group {
     text-align: center;
+    color: white;
+    text-decoration: none;
+    font-size: clamp(1.2rem, 2vw + 0.5rem, 1.5rem);
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
-.nav-menu ul {
-    font-size: inherit;
+button {
+    background-color: transparent;
+    border: none;
+}
+
+#navbar-drop {
+    display: none;
+}
+
+#nav-list {
     list-style-type: none;
     display: flex;
     margin: 0;
-    align-items: center;
+    gap: clamp(4px, 2.5vw, 22px);
 }
 
-.nav-menu ul li {
-    padding: 3px 0 3px 0;
-    margin-right: 10px;
+#nav-list li {
+    padding: 4px 0;
+    list-style-type: none;
+    font-size: 1.5rem;
 }
 
-.nav-menu ul li a {
+#nav-list li a {
     text-decoration: none;
-    color: inherit;
-    padding: 5px 10px;
+    color: white;
+    padding: 5px clamp(4px, 1.5vw, 10px);
 }
 
-.nav-menu ul li a:hover {
+#nav-list li a:hover {
     transition: background-color .5s;
     background-color: rgb(134, 115, 190);
     padding-top: 15px;
-    padding-bottom: 15px;
+    padding-bottom: 20px;
 }
 
+/* Logo and Personalization */
 .logo {
     z-index: 2;
+    margin-top: clamp(15vh, 10vh + 10vw, 55vh);
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
 .logo a {
-    position: relative;
-    margin-top: var(--logo-top-margin);
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%; 
 }
 
 .logo img {
-    scale: 0.45;
-    position: absolute;
+    position: relative;
+    width: 90%;
+    max-width: 600px;
+    height: auto;
     padding: 10px;
 }
 
 .personalization-config {
-    position: fixed;
-    margin-top: -200px;
+    position: absolute;
     display: flex;
+    top: calc(100% + 15px);
     right: clamp(10px, 32px, 64px);
-    top: 64px;
-    z-index: 3;
+    z-index: 4;
 }
 
 .btn-cog {
@@ -147,7 +164,6 @@ div p {
     background-color: transparent;
     border: none;
     position: relative;
-    margin-top: 30px;
     width: 50px;
     height: 50px;
     display: flex;
@@ -167,9 +183,11 @@ div p {
 }
 
 .cog-dropdown {
+    text-shadow: none;
     position: absolute;
-    top: 100px;
+    top: calc(100% + 15px);
     right: 0;
+    
     background-color: rgba(16, 16, 16, 0.9);
     color: white;
     padding: 12px;
@@ -243,6 +261,11 @@ input[type="radio"]:checked + .radio-custom {
     display: inline-flex;
     align-items: center;
     cursor: pointer;
+}
+
+/* Content */
+div.content.welcome-message {
+    background-color: rgba(70, 54, 114, .8);
 }
 
 .content {
@@ -406,7 +429,7 @@ button.cycle-img {
     scale: 1.2;
 }
 
-#active-gallery-image, .season-preview-image {
+#active-gallery-image {
     width: 100%;
     max-width: 100%;
     height: auto;
@@ -415,25 +438,59 @@ button.cycle-img {
     margin-bottom: 20px;
 }
 
-/* Download Buttons for Season Worlds */
+.download-items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 30px;
+}
+
+#image-description {
+    padding: 0 20px;
+    max-width: 90%;
+    line-height: 1.4;
+    margin: 0 auto 20px auto;
+    word-wrap: break-word;
+}
+
+[class^="download-season-"] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.season-preview-image {
+    width: 90%;
+    max-width: 500px;
+    border-radius: 8px;
+    margin: 15px 0;
+    display: block;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+a.download-link-btn {
+    text-decoration: none;
+}
+
 .download-link-btn {
     display: inline-block;
-    margin-top: 15px;
-    padding: 10px 20px;
-    background-color: transparent;
-    border: 2px solid var(--scheme-accent-color);
-    color: var(--scheme-accent-color);
-    text-decoration: none !important; /* Removes the underline */
-    font-family: var(--content-font-minecraft);
-    font-size: 1.5rem;
-    border-radius: 6px;
-    transition: background-color 0.2s ease, color 0.2s ease;
-    cursor: pointer;
+    border: 2px solid #e6a13c;
+    color: white;
+    text-decoration: none;
+    padding: 10px 24px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-family: inherit;
+    transition: all 0.2s ease-in-out;
+    margin-bottom: 10px;
 }
 
 .download-link-btn:hover {
-    background-color: var(--scheme-accent-color);
-    color: #000; /* Makes text black when hovering for contrast */
+    background-color: #e6a13c;
+    color: #1a1a1a;
 }
 
 /* ------------------------------------------------ FOOTER ------------------------------------------------ */
@@ -604,169 +661,96 @@ a.discord-name-link:hover {
     opacity: 0.9;
 }
 
-@media screen and (max-width: 720px) {    
-    .personalization-config {
-        top: 92px;
-    }
-
-    .content {
-        width: 100%;
-    }
-}
-
-@media screen and (max-height: 700px) {
-    .header {
-        height: clamp(42px, 8vh, 44px);
-    }
-}
-
-@media screen and (max-width: 624px) {/* All this does visually is put the title group on top, then the navigation bar underneath. At this width, the navigation bar items are still aligned vertically  */
-    .personalization-config {
-        margin-top: -150px;
-    }
-
-    .header {
-        width: 100%;
+@media screen and (max-width: 864px) {
+    div.header {
         flex-direction: column;
         justify-content: center;
-        height: auto;
-        padding: 15px 0;
-        margin-top: -2%;
-        font-size: 5vw;
+        height: clamp(120px, 8vh, 200px);
+        gap: 15px;
+        padding: 15px 0 15px 0;
     }
 
-    .header a.title-group {
-        align-items: center;
-        text-align: center;
+    #nav-list {
         width: 100%;
-    }
-
-    .nav-menu ul {
         justify-content: center;
-        width: 100%;
-        background-color: transparent;
-        padding: 0;
-        margin-top: 8px;
-    }
-
-    .logo img {/* Shrink the logo to be visible on narrower screens */
-        scale: 0.3;
-    }
-
-    .content-box div {
-        width: 100%;
-    }
-}
-
-@media screen and (max-width: 480px) {/* Make the nav menu options aligned horizontally instead of vertically and increase font size */
-    .nav-menu ul {
-        display: none;
-    }
-
-    .nav-menu ul.show {
-        display: flex;
-    }
-
-    .header #navbar-drop {
-        display: inline-block;
-        width: 32px;
-        height: 16px;
-        background: transparent;
-        border: none;
-        padding: 0;
-        cursor: pointer;
-        vertical-align: bottom;
-        margin-top: .5em;
-        align-items: center;
-        width: 100%;
-        scale: 0.4;
-    }
-
-    .header #navbar-drop svg {
-        width: 100%;
-        height: auto;
-        display: block;
-        transition: transform 0.3s ease-in-out;/* make the arrow spin when pressed */
-    }
-
-    .header #navbar-drop.active svg {
-        transform: rotate(180deg);
+        flex-direction: row;
     }
 
     .personalization-config {
-        margin-top: -100px;
-        top: 0;
-    }
-    
-    .nav-menu ul {
-        font-size: 12pt;
-        flex-direction: column;
-    }
-
-    nav.nav-menu ul li a:hover {
-        padding: 0;
-    }
-
-    .content-box {
-        width: 90%; 
-        padding: 10px;
-    }
-
-    .content-box div h1, .content-box div p {
-        min-width: 0;
-        width: 100%;
-        word-wrap: break-word;/* Prevent long strings from breaking the wrap */
-    }
-
-    .elaboration {
-        text-align: center;
-        margin-left: 0;
+        top: calc(clamp(120px, 8vh, 200px) + 24px); 
     }
 }
 
-@media screen and (max-width: 388px){
-    .logo img {
-        scale: 0.18;
-        padding: 5px;
-    }
-
-    .flex-table div {
-        margin-top: 0;
-    }
-}
-
-@media screen and (max-width: 360px) {
-    /* Targets JioPhone, Nokia, and Small Samsungs */
-    .header a.title-group {
-        font-size: 1rem;
-    }
-
-    .logo img {
-        scale: 0.2; /* Better visibility on tiny screens */
-    }
-
-    .content {
-        border-radius: 8px; /* Softer look on small screens */
-    }
-
-    .content-box div h1 {
-        font-size: 1.5rem;
-    }
-
-    /* Fix for the Gallery buttons touching the edges */
-    .gallery {
-        width: 100%;
+@media screen and (max-width: 720px) {
+    div.header {
+        min-height: clamp(64px, 10vh, 90px);
+        height: auto;
         justify-content: space-between;
-        align-items: center;
+        padding: 10px 5%;
+    }
+
+    div.header div {
+        display: flex;
+        flex-direction: column;
     }
     
-    .cycle-img {
-        padding: 5px;
+    #nav-list {
+        display: grid; 
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(10px, 3vh, 20px) 10px;
+        justify-items: center;
+        width: 100%;
+        padding: 0;
+        max-height: 0;
+        opacity: 0;
+        visibility: hidden;
+        overflow: hidden;
+        transform: translateY(-15px);
+        transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-out, visibility 0.4s;
     }
-}
 
-@media screen and (max-height: 1048px) {
+    /* If odd number of options, put home at the top */
+    /* #nav-list li:first-child {
+        grid-column: span 2; 
+    } */
+
+    #nav-list.show {
+        max-height: 400px;
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        margin-top: 10px;
+    }
+
+    #navbar-drop {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    #navbar-drop svg {
+        transition: transform 0.3s ease-in-out;
+        transform-origin: center;
+    }
+
+    #navbar-drop.active svg {
+        transform: rotate(-180deg);
+    }
+
     .personalization-config {
-        top: 250px;
+        position: absolute;
+        top: calc(100% + 15px);
+        right: 15px; 
+        bottom: auto; 
+        margin-top: 0; 
+    }
+
+    .cog-dropdown {
+        top: calc(100% + 15px);
+        bottom: auto;
+        border-radius: 8px 0px 8px 8px;
+        transform: translateY(-15px);
     }
 }

@@ -1,7 +1,7 @@
 {
     "server":{
         "title": "Sundown SMP",
-        "version": "1.21.11",
+        "version": "26.1.2",
         "ip": "mc.sundown.social",
         "status_api": "https://api.mcstatus.io/v2/status/java/sundown.social",
         "invite_link": "https://discord.gg/wExHHDzt3z"
@@ -11,11 +11,11 @@
         "title": "Sundown SMP",
         "navigation": [
             {"name": "Home", "url": "#home", "target": "_self"},
-            {"name": "Join", "url": "#join", "target": "_self"},
-            {"name": "Map", "url": "https://map.sundown.social/#world:9021:311:-6087:81:0:0:0:0:perspective", "target": "_blank"},
+            {"name": "Map Downloads", "url": "#downloads", "target": "_self", "category": "explore"},
             {"name": "Gallery", "url": "#gallery", "target": "_self"},
-            {"name": "Rules", "url": "#rules", "target": "_self"},
-            {"name": "Downloads", "url": "#downloads", "target": "_self"}
+            {"name": "Bluemap", "url": "https://map.sundown.social/#world:-81:64:-92:81:0:0:0:0:perspective", "target": "_blank", "category": "explore"},
+            {"name": "Rules", "url": "#rules", "target": "_self", "category": "join"},
+            {"name": "Join", "url": "#join", "target": "_self", "category": "join"}
         ],
         "logo": [
             {"text": "Beach", "for": "sundown-beach","id": "sundown-beach", "value": "/assets/ui/sundown_beach.avif"},
@@ -44,7 +44,9 @@
             {"name": "gal-s1-miku-portrait-20260322", "altText": "Miku staring off into the sunrise"},
             {"name": "gal-s1-miku-trading-hall-20260322", "altText": "Miku's trading hall building"},
             {"name": "gal-s1-nerdy-ghast-barn-20260322", "altText": "Nerdy's happy ghast garage and entrance to barn"},
-            {"name": "gal-s1-prs0n-forest-mansion-20260510", "altText": "Prs0n's beautiful large taiga mansion and farm"}
+            {"name": "gal-s1-prs0n-forest-mansion-20260510", "altText": "Prs0n's beautiful large taiga mansion and farm"},
+            {"name": "gal-s2-ori-spawn-bridge-20260528", "altText": "Ori's beautiful bridge connecting the two halves of season two's spawn island"},
+            {"name": "gal-s2-spawn-location-20260528", "altText": "The spawn area for Sundown SMP Season 2, built by Nerdy and Miku"}
         ],
 
         "downloads": [
