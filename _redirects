@@ -1,6 +1,11 @@
-/discord    /discord.html    200
+/discord/    /discord    301
 /home       /index.html    301
 /join       /index.html#join    301
 /rules       /index.html#rules    301
 /map       https://map.sundown.social/#world:-81:64:-92:81:0:0:0:0:perspective    301
+/gallery    /index.html#gallery 301
+
+/join/       /index.html#join    301
+/rules/       /index.html#rules    301
+/map/       https://map.sundown.social/#world:-81:64:-92:81:0:0:0:0:perspective    301
 /gallery    /index.html#gallery 301
