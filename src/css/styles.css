@@ -493,6 +493,266 @@ a.download-link-btn {
     color: #1a1a1a;
 }
 
+/* ------------------------------------------------ VOTING ------------------------------------------------ */
+
+/* 47% width ensures two cards leave a clean margin against the purple container walls */
+.flex-table.vote-options-table .table-item {
+    width: 47%;
+    margin: 6px 0;
+    box-sizing: border-box;
+}
+
+/* If there is only ONE vote option, expand it so it doesn't squish */
+.flex-table.vote-options-table .table-item:only-child {
+    width: 100%;
+    max-width: 500px;
+}
+
+.vote-option {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 12px 16px;
+    box-sizing: border-box;
+    gap: 12px;
+    transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.vote-option:hover {
+    transform: translateY(-2px);
+    border-color: rgba(252, 194, 27, 0.5);
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.vote-option p {
+    padding: 0;
+    margin: 0;
+    font-family: var(--content-font-minecraft);
+}
+
+/* Node Location 1: Targets the first paragraph (The Number: 1, 2, etc.) */
+.vote-option p:nth-of-type(1) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(1.8rem, 2.5vw, 2.2rem);
+    color: #fcc21b;
+    font-weight: bold;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8);
+    min-width: 28px;
+    flex-shrink: 0;
+}
+
+/* Node Location 2: Targets the second paragraph (The Site Name) without needing an ID! */
+.vote-option p:nth-of-type(2) {
+    display: flex;
+    align-items: center;
+    font-size: clamp(1.3rem, 1.8vw, 1.5rem);
+    line-height: 1.1;
+    color: white;
+    flex: 1 1 0%;
+    min-width: 0;
+    text-align: left;
+    padding: 0 6px;
+    overflow-wrap: break-word;
+    word-break: normal;
+}
+
+button.vote-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+    font-family: var(--content-font-minecraft);
+    font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+    background-color: transparent;
+    border: 1px solid #e6a13c;
+    color: white;
+    padding: 6px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    flex-shrink: 0;
+    min-height: 36px;
+    transition: all 0.2s ease-in-out;
+}
+
+button.vote-button:hover {
+    background-color: #e6a13c;
+    color: #1a1a1a;
+    box-shadow: 0 0 10px rgba(230, 161, 60, 0.4);
+    font-weight: bold;
+}
+
+button.vote-button:active {
+    transform: scale(0.96);
+}
+
+/* Container to center the Vote All button and space it cleanly away from the table */
+.vote-all-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 10px 0 25px 0;
+}
+
+/* The Vote All Button: Bold gold border, satisfying chunky presence */
+button.vote-all-btn {
+    font-family: var(--content-font-minecraft);
+    font-size: clamp(1.4rem, 2vw, 1.8rem);
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 2px solid #fcc21b;
+    color: #ffffff;
+    padding: 10px 36px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Hover state: Lifts up and glows gold */
+button.vote-all-btn:hover {
+    background-color: #fcc21b;
+    color: #1a1a1a;
+    text-shadow: none;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(252, 194, 27, 0.5);
+}
+
+/* Active/Click state */
+button.vote-all-btn:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Subtle disclaimer text for popup blockers */
+.popup-disclaimer {
+    font-family: var(--content-font-minecraft);
+    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+    color: #cccccc;
+    opacity: 0.8;
+    margin-top: 8px !important;
+    padding: 0 !important;
+    text-align: center;
+    max-width: 80%;
+}
+
+/* ------------------------------------------------ VOTE MODAL ------------------------------------------------ */
+
+.vote-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.vote-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.vote-modal-box {
+    background-color: #463672;
+    border: 2px solid #fcc21b;
+    border-radius: 12px;
+    padding: 24px 30px;
+    width: 90%;
+    max-width: 420px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    transform: scale(0.95);
+    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.vote-modal-overlay.active .vote-modal-box {
+    transform: scale(1);
+}
+
+.vote-modal-box h3 {
+    font-family: var(--content-font-minecraft);
+    font-size: 2.2rem;
+    color: #fcc21b;
+    margin: 0 0 10px 0;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8);
+}
+
+.vote-modal-box p {
+    font-family: var(--content-font-minecraft);
+    font-size: 1.4rem;
+    line-height: 1.2;
+    margin: 0 0 20px 0;
+    color: #e0e0e0;
+}
+
+.vote-modal-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.vote-modal-btn {
+    font-family: var(--content-font-minecraft);
+    font-size: 1.3rem;
+    padding: 8px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.2s ease;
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+}
+
+.vote-modal-btn.yes {
+    background-color: #e6a13c;
+    border: 1px solid #fcc21b;
+    color: white;
+    font-weight: bold;
+}
+
+.vote-modal-btn.yes:hover {
+    background-color: #fcc21b;
+    color: #1a1a1a;
+    box-shadow: 0 0 10px rgba(230, 161, 60, 0.6);
+}
+
+.vote-modal-btn.no {
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #cccccc;
+}
+
+.vote-modal-btn.no:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-color: white;
+}
+
+.vote-modal-btn:active {
+    transform: scale(0.96);
+    box-shadow: none;
+}
+
 /* ------------------------------------------------ FOOTER ------------------------------------------------ */
 .main-footer {
     background-color: rgba(0, 0, 0, 0.5);
@@ -679,6 +939,15 @@ a.discord-name-link:hover {
     .personalization-config {
         top: calc(clamp(120px, 8vh, 200px) + 24px); 
     }
+
+    .vote-option {
+        padding: 10px 14px;
+        gap: 10px;
+    }
+
+    button.vote-button {
+        padding: 6px 14px;
+    }
 }
 
 @media screen and (max-width: 720px) {
@@ -709,10 +978,10 @@ a.discord-name-link:hover {
         transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-out, visibility 0.4s;
     }
 
-    /* If odd number of options, put home at the top */
-    /* #nav-list li:first-child {
+    /* If odd number of options, put the last item across both columns */
+    #nav-list li:last-child {
         grid-column: span 2; 
-    } */
+    }
 
     #nav-list.show {
         max-height: 400px;
@@ -752,5 +1021,104 @@ a.discord-name-link:hover {
         bottom: auto;
         border-radius: 8px 0px 8px 8px;
         transform: translateY(-15px);
+    }
+
+    .vote-option {
+        padding: 10px 12px;
+        gap: 8px;
+    }
+
+    /* Node Location 1: The Number */
+    .vote-option p:nth-of-type(1) {
+        min-width: 24px;
+    }
+
+    button.vote-button {
+        padding: 6px 12px;
+    }
+}
+
+@media screen and (max-width: 524px) {
+    .vote-option {
+        flex-wrap: wrap;
+        padding: 10px 12px;
+        gap: 6px;
+    }
+
+    button.vote-button {
+        width: 100%;
+        flex-basis: 100%;
+        margin-top: 6px;
+        padding: 6px 12px;
+        min-height: 34px;
+    }
+}
+
+@media screen and (max-width: 470px) {
+    /* Node Location 2: Slides the site name flush-right with centered words */
+    .vote-option p:nth-of-type(2) {
+        justify-content: flex-end;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .vote-option {
+        padding: 8px 10px;
+        gap: 4px;
+    }
+
+    /* Node Location 1: The Number */
+    .vote-option p:nth-of-type(1) {
+        font-size: 1.5rem;
+        min-width: 20px;
+    }
+
+    /* Node Location 2: The Site Name */
+    .vote-option p:nth-of-type(2) {
+        font-size: 1.2rem;
+        padding: 0 4px;
+    }
+
+    button.vote-button {
+        font-size: 1rem;
+        padding: 6px 10px;
+        min-height: 30px;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    /* The Vertical Pyramid Snap: Number, Name, and Button split into 3 rows */
+    .vote-option p:nth-of-type(1) {
+        flex: 0 0 100%;
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 2px;
+    }
+
+    .vote-option p:nth-of-type(2) {
+        flex: 0 0 100%;
+        width: 100%;
+        justify-content: center;
+        text-align: center;      
+        padding: 2px 0;
+    }
+}
+
+@media screen and (max-width: 252px) {
+    .flex-table.vote-options-table {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 0 !important;
+    }
+
+    .flex-table.vote-options-table .table-item {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 6px 0 !important;
+    }
+    
+    .vote-option {
+        padding: 10px 14px;
     }
 }

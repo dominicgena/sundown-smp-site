@@ -15,7 +15,8 @@
             {"name": "Gallery", "url": "#gallery", "target": "_self"},
             {"name": "Bluemap", "url": "https://map.sundown.social/#world:-81:64:-92:81:0:0:0:0:perspective", "target": "_blank", "category": "explore"},
             {"name": "Rules", "url": "#rules", "target": "_self", "category": "join"},
-            {"name": "Join", "url": "#join", "target": "_self", "category": "join"}
+            {"name": "Join", "url": "#join", "target": "_self", "category": "join"},
+            {"name": "Vote", "url": "#vote", "target": "_self"}
         ],
         "logo": [
             {"text": "Beach", "for": "sundown-beach","id": "sundown-beach", "value": "/assets/ui/sundown_beach.avif"},
@@ -35,6 +36,7 @@
             {"name": "gal-s1-duif-enchanter-20260322", "altText": "Duifman's enchanter boat and hangar"},
             {"name": "gal-s1-duif-mechanism-air-20260322", "altText": "An aerial view of Duifman's industrial-organic mechanism"},
             {"name": "gal-s1-duif-mechanism-ground-20260322", "altText": "Duifman's industrial-organic mechanism"},
+            {"name": "gal-s1-end-portal-room-20260322", "altText": "Sundown Season 1's End portal room"},
             {"name": "gal-s1-evo-gothic-house-2-20260427", "altText": "Evo's beautiful gothic home"},
             {"name": "gal-s1-evo-gothic-house-20260427", "altText": "An aerial view of Evo's beautiful gothic home"},
             {"name": "gal-s1-nerdy-ghast-barn-20260322", "altText": "Nerdy's happy ghast garage and entrance to barn"},
@@ -53,8 +55,14 @@
             {"season": 1, "download": "https://drive.google.com/file/d/1ExQUZP-tztxZdmd6IxkvfT0vHjdftXWD/view?usp=sharing", "featured_image_src": "https://cdn.jsdelivr.net/gh/dominicgena/sundown-image-uploads@main/img/gal-s1-choinc-build-walk-20260322.avif"}
         ],
 
+        "vote": [
+            {"site_name": "Planet Minecraft", "vote_link": "https://www.planetminecraft.com/server/sundown-smp/vote/"}
+        ],
+
         "staff": [
-        {"name": "chonkleblorp", "url": "https://discord.com/users/1200315477013049414", "rankRoles": ["SMP Owner and admin, website developer, administrator, moderator", "SMP Owner", "Shooting Stars", "Starlings"]}
+        {"name": "chonkleblorp", "url": "https://discord.com/users/1200315477013049414", "rankRoles": ["SMP Owner and admin, website developer, administrator, moderator", "SMP Owner", "Shooting Stars", "Starlings"]},
+        {"name": "nikkie", "url": "https://discord.com/users/980249171753852978", "rankRoles": ["Administrator, moderator", "Shooting Stars", "Starlings"]},
+        {"name": "originality", "url": "https://discord.com/users/992975618029400195", "rankRoles": ["Administrator, moderator", "Shooting Stars", "Starlings"]}
         ]
     }
 }
