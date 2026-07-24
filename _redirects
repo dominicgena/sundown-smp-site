@@ -1,13 +1,19 @@
-/discord/    /discord    301
-/home       /index.html    301
-/join       /index.html#join    301
-/rules       /index.html#rules    301
-/map       https://map.sundown.social/#world:-81:64:-92:81:0:0:0:0:perspective    301
-/gallery    /index.html#gallery 301
-/vote    /index.html#vote 301
+# Discord & Account Linking
+/discord/    /discord                                                                  301
+/link        https://discord.com/users/1432520822949543996                             301
+/link/       https://discord.com/users/1432520822949543996                             301
 
-/join/       /index.html#join    301
-/rules/       /index.html#rules    301
-/map/       https://map.sundown.social/#world:-81:64:-92:81:0:0:0:0:perspective    301
-/gallery/    /index.html#gallery 301
-/vote/    /index.html#vote 301
+# Core Site Navigation
+/home        /index.html                                                               301
+/join        /index.html#join                                                          301
+/join/       /index.html#join                                                          301
+/rules       /index.html#rules                                                         301
+/rules/      /index.html#rules                                                         301
+/gallery     /index.html#gallery                                                       301
+/gallery/    /index.html#gallery                                                       301
+/vote        /index.html#vote                                                          301
+/vote/       /index.html#vote                                                          301
+
+# External Services
+/map         https://map.sundown.social/#world:-81:64:-92:81:0:0:0:0:perspective       301
+/map/        https://map.sundown.social/#world:-81:64:-92:81:0:0:0:0:perspective       301
