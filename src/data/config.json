@@ -24,6 +24,14 @@
             {"text": "Mountains 2", "for": "mountains-2","id": "mountains-2", "value": "/assets/ui/sundown_mountains2.avif"},
             {"text": "Mountains 3", "for": "mountains-3","id": "mountains-3", "value": "/assets/ui/sundown_mountains3.avif"}
         ],
+        "rules": [
+            {"title": "Whitelist Application", "elaboration": "You MUST submit an application to be whitelisted. Applying is done within the Minecraft server (<em>{{ SERVER_IP }}</em>) by breaking the red-text sign in the hub."},
+            {"title": "Griefing and PVP", "elaboration": "Absolutely no griefing or PVP against players who have not consented. Consent is strictly recorded in the <strong>⁠│✻-𝐫𝐨𝐥𝐞𝐬</strong> channel. Respect the boundaries of your fellow players at all times."},
+            {"title": "Respect & Conduct", "elaboration": "All Discord server rules and TOS apply here. We expect maturity from our members; if your behavior frequently makes others uncomfortable and you fail to correct it, we maintain a zero-tolerance policy to ensure everyone feels safe."},
+            {"title": "World Integrity", "elaboration": "Please do not attempt to acquire the world seed. It is hidden to prevent unfair advantages. Any unauthorized knowledge of the seed is considered an intellectual property violation and will result in consequences."},
+            {"title": "Conflict Resolution", "elaboration": "Policy applies on a report basis. Please try to resolve conflicts personally first, but if efforts are ineffective, communicate the issue to <strong>@Starlings</strong>, <strong>@Shooting Stars</strong>, or <strong>@SMP Owner</strong>. You can get in contact with these people by expanding the \"staff\" section in the footer of this page."},
+            {"title": "Enforcement", "elaboration": "Community safety is our top priority. Offenses are recorded, and while punishment depends on the violation, severity increases with repeated infractions. We will take any action necessary to keep the community safe."}
+        ],
         "radio-name": "sundown-logo",
         "gallery_path": {"name": "/assets/img/uploads/avif"},
         "gallery_format": {"name": "avif"},
