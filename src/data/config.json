@@ -68,7 +68,8 @@
             {"site_name": "Minecraft Servers", "vote_link": "https://minecraftservers.org/server/690886"},
             {"site_name": "Minecraft Server List", "vote_link": "https://minecraft-server-list.com/server/522121/"},
             {"site_name": "Minecraft Buzz", "vote_link": "https://minecraft.buzz/vote/sundown-smp"},
-            {"site_name": "Top Minecraft", "vote_link": "https://topminecraftservers.org/vote/44126"}
+            {"site_name": "Top Minecraft", "vote_link": "https://topminecraftservers.org/vote/44126"},
+            {"site_name": "Craft List", "vote_link": "https://craftlist.org/sundown-smp#vote"}
         ],
 
         "staff": [
